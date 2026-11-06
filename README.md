@@ -22,7 +22,7 @@
 
 USM-Ultra is a modular virtual-first platform for historical computers, custom ICs and recovery workflows. **It must ultimately work completely without physical hardware.** Once compatible real chips or FPGA adapters are available, the operator may select them for individual logical components. Hardware is never a mandatory dependency.
 
-> **Current status:** Experimental Python functional prototype. No complete Atari ST, Amiga or Z80 machine boot; no real Musashi binding or hardware-in-the-loop yet. The current mini-68000 is a limited machine-code smoke-test interpreter, not a complete emulator.
+> **Current status:** Experimental Python functional prototype including a partial USM-6502 SBC, monitor, BIN/PRG loader, simplified peripherals and a host-side BASIC fallback. No complete historical computer, native 6502 BASIC, Musashi backend or physical hardware integration yet.
 
 ## System overview
 
@@ -59,7 +59,7 @@ Python 3.11+ required:
 git clone https://github.com/Thomas-Heisig/USM-Ultra.git
 cd USM-Ultra
 python -m venv .venv
-python -m pip install -e ".[web,test]"
+python -m pip install -e ".[6502,web,test]"
 python -m pytest -q
 python -m usm.cli status
 python -m usm.cli web
@@ -97,18 +97,50 @@ Original project: Thomas Heisig. Copyright © 2026 Thomas Heisig. All rights res
 
 The dashboard now exposes local settings, capability flags and a documentation directory. See [settings guide](docs/SETTINGS.md). Hybrid and physical modes remain disabled until real backends exist.
 
-## First executable target: USM-6502
+## USM-6502: aktueller Funktionsumfang
 
-Install `pip install -e ".[6502,web,test]"`, then run `python -m usm.cli 6502` or use **6502-ROM starten** in MasterVisor. This is a minimal 6502 SBC ROM/UART boot demo, **not** a complete interactive monitor or a C64/Apple II emulator. [Machine specification](docs/USM_6502.md).
+Das erste Maschinenprofil ist ein **eigener virtueller 6502-Einplatinencomputer** mit py65, 32 KiB RAM, 8 KiB synthetischem ROM, UART RX/TX, Timer und GPIO. Die Geräte sind **USM-spezifische Modelle**, keine vollständigen historischen ACIA/VIA-Chips. Der Monitor unterstützt BIN/PRG-Laden in RAM, Reset, begrenztes Ausführen, Einzelschritt, Breakpoints, RAM-Inspektion und -Änderung. ROM-, D64-, DSK- und WOZ-Boot sind noch nicht implementiert.
 
-## MasterVisor frontend
+Ein selbst geschriebenes 6502-Startprogramm sendet `USM 6502 READY` an die virtuelle UART. Im MasterVisor steht zusätzlich eine einfache interaktive BASIC-Konsole mit PRINT, LET, IF/THEN, GOTO, RUN, LIST und NEW bereit. **Diese BASIC-Konsole läuft auf Python, nicht auf der emulierten 6502-CPU.** Tiny BASIC/EhBASIC als nativer 6502-Binärcode bleibt offen.
 
-The responsive MasterVisor is the primary browser interface, with dedicated pages for dashboard, machines, chip modules, USP matrix, memory, task queue, trace, hardware, recovery, settings and documentation. See [MasterVisor manual](docs/MASTER_VISOR.md). The development server is localhost-only; hardware and recovery operations remain disabled until implemented.
+Lokale Maschinen-Arbeitsbereiche enthalten Software, ROM-Verzeichnisse und CPU/RAM/Peripherie-Snapshots. Die Snapshot-Kompatibilität ist derzeit an das py65-Backend und das ROM gebunden; echte Hardware kann noch nicht wiederhergestellt werden.
 
-## Persistent machine workspaces
+### Starten
 
-MasterVisor now provides a private per-machine software directory and 6502 save/restore snapshots (CPU registers, RAM, UART and logical tick). See [workspace guide](docs/MACHINE_WORKSPACES.md). Program uploads are stored, **not executed**. Full computer emulation remains in development.
+```bash
+python -m pip install -e ".[6502,web,test]"
+python -m pytest -q
+python -m usm.cli web
+```
 
-## MOS 6502 reference ecosystem
+Danach MasterVisor unter http://127.0.0.1:8000 öffnen. Die Installation von py65 ist **erforderlich**, um den 6502 auszuführen. Der Server darf ohne zusätzliche Absicherung nicht ins öffentliche Netz gestellt werden.
 
-[6502 architecture, upstream emulator/FPGA/toolchain references and machine profiles](docs/MOS_6502_REFERENCE.md). Curated reference API: `/api/6502/sources` and `/api/6502/system-profiles`. External source code and copyrighted ROMs are not vendored.
+### Aktueller Projektstatus
+
+| Bereich | Stand |
+| --- | --- |
+| USP-Matrix, RAM/ROM, WindowManager, Task Queue | Funktionaler Prototyp |
+| 6502 CPU und eigenes SBC-Profil | Teilweise ausführbar über py65 |
+| Monitor, BIN/PRG-Loader, Breakpoints | Implementiert, E2E noch nicht bestätigt |
+| UART, Timer, GPIO | Vereinfachte virtuelle Peripherie |
+| Startprogramm in echtem 6502-Code | Implementiert, E2E noch nicht bestätigt |
+| BASIC-Konsole | Python-Host-Fallback, **kein natives 6502-BASIC** |
+| Snapshot/Arbeitsbereich | Lokale Persistenz, weitere Integritätsprüfung offen |
+| Apple I/II, C64, Atari, NES | Referenzprofile, **nicht emuliert** |
+| Musashi m68k, Z80-Vollkern | Nicht integriert |
+| FPGA/echte Chips | Nicht angeschlossen, optional für die Zukunft |
+| Vollständige V7-DOCX im Repository | Noch nicht vorhanden |
+
+## Dokumentation
+
+- [Dokumentationsindex](docs/README.md) · [Status](STATUS.md) · [Offene Aufgaben](TODO.md) · [Roadmap](ROADMAP.md)
+- [6502-Monitor und Image-Loader](docs/MONITOR_6502.md) · [6502-Peripherie](docs/PERIPHERALS_6502.md)
+- [BASIC: Implementierung und native Portierung](docs/BASIC_6502.md) · [Maschinen-Arbeitsbereiche](docs/MACHINE_WORKSPACES.md)
+- [MOS 6502: Technik, Quellen, historische Systeme](docs/MOS_6502_REFERENCE.md)
+- [Virtual-First-Architektur](docs/VIRTUAL_FIRST.md) · [MasterVisor](docs/MASTER_VISOR.md)
+- [V7-Studienübersicht](docs/STUDIE_V7.md) (vollständige illustrierte DOCX noch nicht eingecheckt)
+- [Entwicklungsrichtlinien](CONTRIBUTING.md) · [Sicherheit](SECURITY.md) · [Lizenz](LICENSE) · [Drittanbieter](NOTICE.md)
+
+## Rechte und Grenzen
+
+Das Repository ist privat und die Projektlizenz proprietär. Fremde Open-Source-Projekte werden als Referenzen katalogisiert, aber ohne gesonderte Lizenzprüfung nicht automatisch eingebunden. Original-ROMs und Diskettenabbilder werden nicht in Git veröffentlicht. Der Betrieb soll dauerhaft auch ohne physische Hardware möglich bleiben.
