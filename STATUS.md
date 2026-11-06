@@ -51,3 +51,7 @@ Initial executable virtual SBC profile added: optional py65 CPU backend, 32 KiB 
 ## Modular MasterVisor frontend
 
 Eleven module pages are connected to the existing FastAPI backend: dashboard, machines, components, matrix, memory, tasks, trace, hardware, recovery, settings and documentation. Memory inspection and task submission/listing endpoints added. Hardware/recovery are labeled unavailable. This is a UI/API integration milestone, not complete machine emulation. End-to-end/CI validation pending.
+
+## Persistent machine workspace milestone
+
+Added local isolated machine directories, 6502 software upload, CPU/RAM/UART snapshot save and restore, browser controls and tests. Full monitor, program loader, peripherals, and hardware-state restoration remain incomplete. New CI tests are not yet confirmed passing.
