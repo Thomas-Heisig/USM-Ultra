@@ -3,15 +3,77 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 from .core import Lab
 from .catalog import components, component, summary
+from .settings import SettingsStore, SettingsError
+from collections import deque
 
 app=FastAPI(title="USM MasterVisor",version="0.2.0")
 lab=Lab()
+settings_store=SettingsStore()
+try:
+    lab.matrix.trace = deque(lab.matrix.trace, maxlen=settings_store.read()['trace_capacity'])
+except (OSError, ValueError):
+    pass
 class Access(BaseModel):
     cpu: str = "cpu0"
     address: int = Field(ge=0,le=0xFFFFFFFF)
     width: int = 1
     write: bool = False
     value: int = Field(default=0,ge=0,le=0xFFFFFFFF)
+
+class SettingsUpdate(BaseModel):
+    mode: str | None = None
+    hardware_policy: str | None = None
+    trace_capacity: int | None = Field(default=None, ge=256, le=1048576)
+    theme: str | None = None
+    locale: str | None = None
+    default_cpu: str | None = None
+    auto_fallback: bool | None = None
+
+@app.get("/api/settings")
+def get_settings():
+    try:
+        return settings_store.read()
+    except (OSError, ValueError) as exc:
+        raise HTTPException(500, f"settings read error: {exc}")
+
+@app.put("/api/settings")
+def put_settings(changes: SettingsUpdate):
+    payload=changes.model_dump(exclude_none=True)
+    try:
+        updated=settings_store.update(payload)
+    except (SettingsError, ValueError) as exc:
+        raise HTTPException(422, str(exc))
+    except OSError as exc:
+        raise HTTPException(500, f"settings write error: {exc}")
+    lab.matrix.trace=deque(lab.matrix.trace,maxlen=updated["trace_capacity"])
+    return updated
+
+@app.get("/api/capabilities")
+def capabilities():
+    return {
+        "virtual_matrix": True,
+        "component_catalog": True,
+        "settings": True,
+        "trace": True,
+        "full_m68000": False,
+        "musashi": False,
+        "machine_boot": False,
+        "hardware_discovery": False,
+        "hybrid_mode": False,
+        "physical_mode": False,
+        "timing_t0": False,
+    }
+
+@app.get("/api/docs-index")
+def docs_index():
+    return [
+        {"title":"Projektstatus","path":"STATUS.md","url":"https://github.com/Thomas-Heisig/USM-Ultra/blob/main/STATUS.md"},
+        {"title":"Einstellungen","path":"docs/SETTINGS.md","url":"https://github.com/Thomas-Heisig/USM-Ultra/blob/main/docs/SETTINGS.md"},
+        {"title":"Chipkatalog","path":"docs/CHIP_CATALOG.md","url":"https://github.com/Thomas-Heisig/USM-Ultra/blob/main/docs/CHIP_CATALOG.md"},
+        {"title":"Virtual-First Architektur","path":"docs/VIRTUAL_FIRST.md","url":"https://github.com/Thomas-Heisig/USM-Ultra/blob/main/docs/VIRTUAL_FIRST.md"},
+        {"title":"Zeitklassen und Modi","path":"docs/MODES_AND_TIMING.md","url":"https://github.com/Thomas-Heisig/USM-Ultra/blob/main/docs/MODES_AND_TIMING.md"},
+        {"title":"V7-Studie (Kapitelübersicht)","path":"docs/STUDIE_V7.md","url":"https://github.com/Thomas-Heisig/USM-Ultra/blob/main/docs/STUDIE_V7.md"},
+    ]
 
 @app.get("/api/components")
 def list_components(family: str | None = None):
@@ -68,6 +130,16 @@ button{cursor:pointer;background:#236da3}pre{white-space:pre-wrap;overflow-wrap:
 <select id="family" aria-label="Chipfamilie"><option value="">Alle Kategorien</option></select>
 <select id="filter" aria-label="Implementierungsstand"><option value="">Alle Status</option><option value="emulated">Emuliert</option><option value="stub">Stub</option><option value="not_implemented">Nicht implementiert</option></select></div>
 <div class="cards" id="chips"></div></section>
+<section class="panel"><h2>Einstellungen</h2><p class="muted">Lokale Konfiguration. Hardware-Modi sind gesperrt, solange keine Hardwareintegration existiert.</p>
+<div class="controls">
+<label>Modus <select id="mode"><option value="virtual">Virtual (aktiv)</option><option value="hybrid" disabled>Hybrid – nicht verfügbar</option><option value="physical" disabled>Physical – nicht verfügbar</option></select></label>
+<label>Trace-Kapazität <input type="number" id="traceCapacity" min="256" max="1048576" step="256"></label>
+<label>Sprache <select id="locale"><option value="de">Deutsch</option><option value="en">English</option></select></label>
+<label>Design <select id="theme"><option value="dark">Dunkel</option><option value="light">Hell (gespeichert)</option></select></label>
+<label>CPU <select id="defaultCpu"><option value="cpu0">CPU 0 · 68000 Stub</option><option value="cpu1">CPU 1 · Z80 Stub</option></select></label>
+<button id="saveSettings">Einstellungen speichern</button>
+</div><p id="settingsMessage" role="status" class="muted"></p></section>
+<section class="panel"><h2>Dokumentation</h2><div id="docsLinks" class="controls"></div><p class="muted">V7-Volltext-DOCX ist noch nicht im Repository. Die Studienübersicht ist abrufbar.</p></section>
 <section class="panel"><h2>Virtuelle USP-Matrix</h2><pre id="status"></pre></section>
 <section class="panel"><h2>Bus-Trace</h2><button id="demo">68000-Demozugriff</button><pre id="trace"></pre></section>
 </main><script>
@@ -95,13 +167,32 @@ async function refresh(){
  document.getElementById("status").textContent=JSON.stringify(await s.json(),null,2);
  document.getElementById("trace").textContent=JSON.stringify(await t.json(),null,2);
 }
+async function loadSettings(){
+ const s=await (await fetch("/api/settings")).json();
+ document.getElementById("mode").value=s.mode;
+ document.getElementById("traceCapacity").value=s.trace_capacity;
+ document.getElementById("locale").value=s.locale;
+ document.getElementById("theme").value=s.theme;
+ document.getElementById("defaultCpu").value=s.default_cpu;
+}
+async function loadDocs(){
+ const docs=await (await fetch("/api/docs-index")).json();
+ const box=document.getElementById("docsLinks");box.replaceChildren();
+ for(const d of docs){const a=element("a","badge",d.title);a.href=d.url;a.target="_blank";a.rel="noopener noreferrer";box.append(a)}
+}
+document.getElementById("saveSettings").addEventListener("click",async()=>{
+ const data={mode:document.getElementById("mode").value,trace_capacity:Number(document.getElementById("traceCapacity").value),locale:document.getElementById("locale").value,theme:document.getElementById("theme").value,default_cpu:document.getElementById("defaultCpu").value};
+ const response=await fetch("/api/settings",{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
+ const body=await response.json();
+ document.getElementById("settingsMessage").textContent=response.ok?"Einstellungen lokal gespeichert.":"Fehler: "+JSON.stringify(body);
+});
 async function load(){
  const [a,b]=await Promise.all([fetch("/api/components"),fetch("/api/components/summary")]);
  inventory=await a.json();const totals=await b.json();
  document.getElementById("summary").textContent=totals.total+" Komponenten erfasst · "+totals.emulated+" Softwaremodelle · "+totals.stub+" Stubs · "+totals.not_implemented+" nicht implementiert";
  const select=document.getElementById("family");
  for(const family of [...new Set(inventory.map(x=>x.family))].sort()){const o=document.createElement("option");o.value=family;o.textContent=family;select.append(o)}
- render();refresh();
+ render();refresh();loadSettings();loadDocs();
 }
 for(const id of ["search","family","filter"])document.getElementById(id).addEventListener("input",render);
 document.getElementById("demo").addEventListener("click",async()=>{
