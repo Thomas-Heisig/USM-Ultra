@@ -47,3 +47,7 @@ Full Amiga/TOS boot, cycle-exact timing, FPGA execution, seamless migration of p
 ## First machine profile: USM-6502
 
 Initial executable virtual SBC profile added: optional py65 CPU backend, 32 KiB RAM, 8 KiB ROM, synthetic UART and original boot demo. CLI and MasterVisor run endpoint are wired. Full interactive monitor, interrupt/timer devices, hardware CPU bridge and real machine compatibility remain open. CI result not yet verified.
+
+## Modular MasterVisor frontend
+
+Eleven module pages are connected to the existing FastAPI backend: dashboard, machines, components, matrix, memory, tasks, trace, hardware, recovery, settings and documentation. Memory inspection and task submission/listing endpoints added. Hardware/recovery are labeled unavailable. This is a UI/API integration milestone, not complete machine emulation. End-to-end/CI validation pending.
