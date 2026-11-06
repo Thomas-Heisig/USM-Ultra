@@ -6,6 +6,7 @@ backend without changing the memory map or UART contract.
 from dataclasses import dataclass
 from . import __doc__ as _machine_doc
 from ..core import Matrix, Mapping, RAM, Transaction
+from .peripherals import SerialPort, Timer, GPIO
 
 RAM_START, RAM_SIZE = 0x0000, 0x8000
 UART_ADDR = 0x8000
@@ -92,14 +93,18 @@ class SBC6502:
     def __init__(self, rom=None):
         self.matrix = Matrix()
         self.ram = RAM(RAM_SIZE)
-        self.uart = UART()
+        self.uart = SerialPort()
+        self.timer = Timer()
+        self.gpio = GPIO()
         self.rom = RAM(ROM_SIZE, readonly=True)
         image = demo_rom() if rom is None else bytes(rom)
         if len(image) != ROM_SIZE:
             raise ValueError("ROM must be exactly 8192 bytes")
         self.rom.data[:] = image
         self.matrix.map(Mapping(RAM_START, RAM_SIZE, self.ram, "6502 RAM"))
-        self.matrix.map(Mapping(UART_ADDR, 1, self.uart, "UART TX"))
+        self.matrix.map(Mapping(UART_ADDR, 2, self.uart, "Serial RX/TX"))
+        self.matrix.map(Mapping(0x8010, 4, self.timer, "Timer"))
+        self.matrix.map(Mapping(0x8020, 2, self.gpio, "GPIO"))
         self.matrix.map(Mapping(ROM_START, ROM_SIZE, self.rom, "6502 ROM", write=False))
         self.memory = BusMemory(self.matrix)
         self.cpu = None
@@ -111,6 +116,35 @@ class SBC6502:
         self.cpu = MPU(memory=self.memory)
         self.cpu.reset()
         return self.cpu.pc
+    def load_program(self, payload, address=0x0200, start=True):
+        if not isinstance(payload, (bytes, bytearray)) or not payload:
+            raise ValueError("program must contain bytes")
+        if not 0 <= address < RAM_SIZE or address + len(payload) > RAM_SIZE:
+            raise ValueError("program does not fit RAM")
+        self.ram.data[address:address+len(payload)] = payload
+        if self.cpu is None:
+            self.boot()
+        if start:
+            self.cpu.pc = address
+        return {"address": address, "size": len(payload), "pc": self.cpu.pc}
+
+    def step(self, count=1):
+        if not 1 <= count <= 100000:
+            raise ValueError("step count out of range")
+        if self.cpu is None:
+            self.boot()
+        for _ in range(count):
+            self.cpu.step()
+            self.timer.advance(1)
+        return self.status()
+
+    def peripherals(self):
+        return {"serial": {"rx_pending": len(self.uart.input), "tx": self.uart.text()},
+                "timer": {"period": self.timer.period, "counter": self.timer.counter,
+                          "enabled": self.timer.enabled, "pending": self.timer.pending},
+                "gpio": {"data": self.gpio.data, "direction": self.gpio.direction, "inputs": self.gpio.inputs},
+                "hardware": "not_available"}
+
     def run(self, max_steps=10000):
         if self.cpu is None:
             self.boot()
@@ -119,6 +153,7 @@ class SBC6502:
             if self.cpu.pc == 0xE00F:
                 break
             self.cpu.step()
+            self.timer.advance(1)
             steps += 1
         return RunResult(steps, self.cpu.pc, self.uart.text(), self.matrix.tick)
     def status(self):
@@ -132,7 +167,9 @@ class SBC6502:
             "matrix_ticks": self.matrix.tick,
             "memory_map": [
                 {"start": "0x0000", "end": "0x7FFF", "name": "RAM"},
-                {"start": "0x8000", "end": "0x8000", "name": "UART TX"},
+                {"start": "0x8000", "end": "0x8001", "name": "Serial RX/TX"},
+                {"start": "0x8010", "end": "0x8013", "name": "Timer"},
+                {"start": "0x8020", "end": "0x8021", "name": "GPIO"},
                 {"start": "0xE000", "end": "0xFFFF", "name": "ROM"},
             ],
         }
