@@ -1,57 +1,45 @@
-# USM-Ultra Dokumentation
+# USM-Ultra — Dokumentationsindex
 
-## Wissenschaftliche Ausarbeitung
+Stand: 2026-11-06. **Virtual-First** ist die verbindliche Architektur: vollständige Software-Nutzung soll unabhängig von Hardware möglich sein. Hybrid und Physical sind noch nicht verfügbar.
 
-- [V7.0: wissenschaftliche Systemstudie – Leseausgabe](STUDIE_V7.md)
-- Originaldatei: **USM_Ultra_Wissenschaftliche_Studie_V7_System_Matrix_UI.docx** (in der Projektarbeitsumgebung; noch nicht im GitHub-Repository). Die verlinkte Markdown-Datei ist ein Kapitelwegweiser und technischer Auszug, keine vollständige Transkription.
-- Die V7-Studie ist eine Konzept- und Spezifikationsgrundlage, **kein Mess- oder Fertigungsnachweis**.
+## Einstieg und Betrieb
 
-## Implementierung
+- [Projektübersicht und Quickstart](../README.md)
+- [Tatsächlicher Implementierungsstatus](../STATUS.md)
+- [Priorisierte offene Aufgaben](../TODO.md)
+- [Roadmap](../ROADMAP.md)
+- [Entwicklung und Tests](DEVELOPMENT.md)
+- [Sicherheit](../SECURITY.md) · [Lizenz](../LICENSE) · [Drittanbieterhinweise](../NOTICE.md)
 
-- [Architektur und Sicherheitsgrenzen](ARCHITECTURE.md)
-- [USP und Window-Semantik](USP_SPEC.md)
-- [Entwicklungs- und Testablauf](DEVELOPMENT.md)
-- [ROM- und Recovery-Datenschutz](ROM_POLICY.md)
+## USM-6502 — erster virtueller Computer
+
+- [Maschinenarchitektur und Boot-ROM](USM_6502.md)
+- [Interaktiver Monitor, Breakpoints, BIN/PRG-Image-Loader](MONITOR_6502.md)
+- [UART, Timer, GPIO und Speicherkarte](PERIPHERALS_6502.md)
+- [BASIC-Konsole: Python-Fallback und native 6502-Portierung](BASIC_6502.md)
+- [Getrennte Arbeitsbereiche und Snapshots](MACHINE_WORKSPACES.md)
+- [MOS 6502: Geschichte, Technik, Referenzprojekte und historische Maschinen](MOS_6502_REFERENCE.md)
+- [ROM- und Image-Datenschutz](ROM_POLICY.md)
+
+## MasterVisor und APIs
+
+- [Frontend, Modulnavigation und Bedienung](MASTER_VISOR.md)
+- [Einstellungen und Konfiguration](SETTINGS.md)
+- [Chip- und Modul-Katalog](CHIP_CATALOG.md)
+- [OpenAPI-Schema zur Laufzeit](http://127.0.0.1:8000/openapi.json) — nur bei lokal laufendem Server
+
+## Systemarchitektur und Forschung
+
+- [Architektur](ARCHITECTURE.md)
+- [USP-Spezifikation](USP_SPEC.md)
+- [Virtual-First- und Hybrid-Vertrag](VIRTUAL_FIRST.md)
+- [Betriebsmodi und Zeitklassen](MODES_AND_TIMING.md)
+- [Musashi-Integrationsplan](MUSASHI_INTEGRATION.md)
+- [V0.2-Code-Review](CODE_REVIEW_V02.md)
+- [Wissenschaftliche V7-Studie: Kapitelübersicht](STUDIE_V7.md)
+
+Die vollständige bebilderte V7-DOCX ist **noch nicht** Bestandteil des GitHub-Repositories. Die Markdown-Datei ist kein vollständiger Ersatz. Weder die Studie noch die Projektbeschreibungen sind ein Nachweis für physische FPGA-Funktion, elektrische Sicherheit oder Zyklusgenauigkeit.
 
 ## Revisionsregel
 
-Bei Änderungen an Registeradressen, Busverhalten, Timing-Klassen oder Pinbelegungen muss der Bezug zur Studie überprüft und dokumentiert werden. Als TBD gekennzeichnete Werte dürfen nicht als verifiziert übernommen werden.
-
-## Code-Review und V0.3
-
-- [Tatsächlicher V0.2-Implementierungsstand und offene Fehler](CODE_REVIEW_V02.md)
-- [Musashi-C-Shim und ctypes-Integrationsplan](MUSASHI_INTEGRATION.md)
-- [Erweiterte V0.3-Vertragstests](../tests/test_v03_contracts.py)
-
-## Virtual-first / Hybrid
-
-- [Verbindliche Software-only- und Hybrid-Architektur](VIRTUAL_FIRST.md)
-- [Roadmap und Meilensteine](../ROADMAP.md)
-- [Backend-Registry-Implementierung](../usm/backends.py)
-- [Backend-Fallback-Tests](../tests/test_backends.py)
-
-## Chipkatalog und API
-
-- [Chip- und Komponentenübersicht](CHIP_CATALOG.md)
-- [Virtual / Hybrid / Physical und Zeitklassen](MODES_AND_TIMING.md)
-- [Aktueller Implementierungsstatus](../STATUS.md)
-
-## MasterVisor Full-Stack
-
-- [Einstellungen, Persistenz und REST-API](SETTINGS.md)
-- [MasterVisor Web API](../usm/web.py)
-- [API-Einstellungen und Integrationstests](../tests/test_settings_api.py)
-
-## Erste vollständige Zielmaschine in Entwicklung
-
-- [USM-6502: virtueller Einplatinencomputer](USM_6502.md)
-- [6502-Maschinenprofil und ROM](../usm/machines/sbc6502.py)
-- [6502-Tests](../tests/test_sbc6502.py)
-
-## Bedienoberfläche
-
-- [MasterVisor: vollständige Modulnavigation, API und Bedienung](MASTER_VISOR.md)
-
-- [Maschinen-Arbeitsbereiche, Programme und Speicherabbilder](MACHINE_WORKSPACES.md)
-
-- [MOS Technology 6502: CPU, Quellen, Systeme, Originalsoftware und Lizenzhinweise](MOS_6502_REFERENCE.md)
+Jede Änderung an CPU-/Peripherie-Registern, Adressraum, Image-Format, Snapshots, Backend-Schnittstellen oder Zeitklassen muss in der zugehörigen Spezifikation und den Tests nachgezogen werden. Referenzierte externe Repositories sind nicht automatisch als Quellcode integriert.
