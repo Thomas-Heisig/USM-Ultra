@@ -128,6 +128,73 @@ def restore_6502_snapshot(name: str):
         except (RuntimeError, WorkspaceError, ValueError, KeyError, TypeError) as exc:
             raise HTTPException(422, str(exc))
 
+class ProgramLoad(BaseModel):
+    name: str
+    address: int = Field(default=0x0200, ge=0, lt=32768)
+    start: bool = True
+
+class StepRequest(BaseModel):
+    count: int = Field(default=1, ge=1, le=100000)
+
+class SerialInput(BaseModel):
+    text: str = Field(max_length=4096)
+
+class GPIOInput(BaseModel):
+    value: int = Field(ge=0, le=255)
+
+def active_6502():
+    global machine_6502
+    if machine_6502 is None:
+        machine_6502 = SBC6502()
+        machine_6502.boot()
+    return machine_6502
+
+@app.post("/api/machines/usm-6502/load")
+def load_6502_program(request: ProgramLoad):
+    with machine_lock:
+        try:
+            if not __import__("re").fullmatch(r"[A-Za-z0-9_-]+\\.(bin|prg|rom)", request.name):
+                raise ValueError("invalid program filename")
+            path = workspace_6502.path / "software" / request.name
+            if path.is_symlink():
+                raise ValueError("symlink not allowed")
+            data = path.read_bytes()
+            return active_6502().load_program(data, request.address, request.start)
+        except FileNotFoundError:
+            raise HTTPException(404, "program not found")
+        except (ValueError, RuntimeError) as exc:
+            raise HTTPException(422, str(exc))
+
+@app.post("/api/machines/usm-6502/step")
+def step_6502(request: StepRequest):
+    with machine_lock:
+        try:
+            return active_6502().step(request.count)
+        except (ValueError, RuntimeError) as exc:
+            raise HTTPException(422, str(exc))
+
+@app.get("/api/machines/usm-6502/peripherals")
+def peripherals_6502():
+    with machine_lock:
+        return active_6502().peripherals()
+
+@app.post("/api/machines/usm-6502/serial/input")
+def serial_input_6502(request: SerialInput):
+    with machine_lock:
+        try:
+            machine = active_6502()
+            machine.uart.receive(request.text.encode("ascii", errors="replace"))
+            return machine.peripherals()["serial"]
+        except ValueError as exc:
+            raise HTTPException(422, str(exc))
+
+@app.post("/api/machines/usm-6502/gpio/input")
+def gpio_input_6502(request: GPIOInput):
+    with machine_lock:
+        machine = active_6502()
+        machine.gpio.inputs = request.value
+        return machine.peripherals()["gpio"]
+
 @app.get("/api/machines")
 def machines():
     return [{"id":"usm-6502","name":"USM-6502 SBC","backend":"py65","hardware":"not_probed","status":"experimental","description":"32 KiB RAM, 8 KiB ROM, synthetic UART; software-only"}]
