@@ -3,7 +3,7 @@
 ## Wissenschaftliche Ausarbeitung
 
 - [V7.0: wissenschaftliche Systemstudie – Leseausgabe](STUDIE_V7.md)
-- Originaldatei: **USM_Ultra_Wissenschaftliche_Studie_V7_System_Matrix_UI.docx** (in der Projektarbeitsumgebung; GitHub-Binärablage folgt nach gesondertem Upload).
+- Originaldatei: **USM_Ultra_Wissenschaftliche_Studie_V7_System_Matrix_UI.docx** (in der Projektarbeitsumgebung; noch nicht im GitHub-Repository). Die verlinkte Markdown-Datei ist ein Kapitelwegweiser und technischer Auszug, keine vollständige Transkription.
 - Die V7-Studie ist eine Konzept- und Spezifikationsgrundlage, **kein Mess- oder Fertigungsnachweis**.
 
 ## Implementierung
