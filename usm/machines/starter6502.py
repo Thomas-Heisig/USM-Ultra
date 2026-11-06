@@ -7,7 +7,7 @@ from .monitor6502 import parse_image
 def hello_program():
     # LDX #0 ; LDA $0210,X ; BEQ done ; STA $8000 ; INX ; JMP $0202
     # done: JMP done ; string at $0210
-    code = bytes.fromhex("a200bd1002f0078d0080e84c02024c0d02")
+    code = bytes.fromhex("a200bd1002f0068d0080e84c02024c0d02")
     return code + b"USM 6502 READY\r\n\x00"
 
 def install_hello(machine):
