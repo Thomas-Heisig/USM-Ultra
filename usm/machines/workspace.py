@@ -59,6 +59,9 @@ class MachineWorkspace:
             "registers": registers,
             "ram": machine.ram.data.hex(),
             "uart": machine.uart.output.hex(),
+            "serial_rx": bytes(machine.uart.input).hex(),
+            "timer": machine.peripherals()["timer"],
+            "gpio": machine.peripherals()["gpio"],
             "matrix_tick": machine.matrix.tick,
         }
         self.ensure()
@@ -114,6 +117,16 @@ class MachineWorkspace:
                 machine.boot()
             machine.ram.data[:] = ram
             machine.uart.output[:] = uart
+            machine.uart.input.clear()
+            machine.uart.input.extend(bytes.fromhex(state.get("serial_rx", "")))
+            timer = state.get("timer", {})
+            for key in ("period", "counter", "enabled", "pending"):
+                if key in timer:
+                    setattr(machine.timer, key, timer[key])
+            gpio = state.get("gpio", {})
+            for key in ("data", "direction", "inputs"):
+                if key in gpio:
+                    setattr(machine.gpio, key, gpio[key])
             for key, value in regs.items():
                 setattr(machine.cpu, key, value)
             machine.matrix.tick = tick
