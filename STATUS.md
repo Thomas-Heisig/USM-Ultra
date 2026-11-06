@@ -34,3 +34,12 @@
 ## Non-goals of current version
 
 Full Amiga/TOS boot, cycle-exact timing, FPGA execution, seamless migration of physical chip state, full ROM management, and remote unauthenticated access.
+
+## MasterVisor-Einstellungen (neu)
+
+- GET/PUT /api/settings: validierte lokale JSON-Konfiguration, atomar gespeichert
+- GET /api/capabilities: Feature-Verfügbarkeit
+- GET /api/docs-index: Dokumentationsverweise
+- MasterVisor: Einstellungen und Dokumentation eingebunden
+- Nur virtual ist aktivierbar; hybrid/physical bleiben bewusst gesperrt
+- CI-Ergebnis der neuen Endpunkte noch zu bestätigen
