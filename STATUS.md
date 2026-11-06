@@ -43,3 +43,7 @@ Full Amiga/TOS boot, cycle-exact timing, FPGA execution, seamless migration of p
 - MasterVisor: Einstellungen und Dokumentation eingebunden
 - Nur virtual ist aktivierbar; hybrid/physical bleiben bewusst gesperrt
 - CI-Ergebnis der neuen Endpunkte noch zu bestätigen
+
+## First machine profile: USM-6502
+
+Initial executable virtual SBC profile added: optional py65 CPU backend, 32 KiB RAM, 8 KiB ROM, synthetic UART and original boot demo. CLI and MasterVisor run endpoint are wired. Full interactive monitor, interrupt/timer devices, hardware CPU bridge and real machine compatibility remain open. CI result not yet verified.
