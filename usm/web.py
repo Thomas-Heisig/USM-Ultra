@@ -8,9 +8,11 @@ from collections import deque
 from threading import RLock
 from .machines.workspace import MachineWorkspace, WorkspaceError
 from .machines.sbc6502 import SBC6502
+from .machines.monitor6502 import Monitor, parse_image
 
 machine_lock = RLock()
 machine_6502 = None
+monitor_6502 = None
 workspace_6502 = MachineWorkspace()
 
 app=FastAPI(title="USM MasterVisor",version="0.2.0")
@@ -116,16 +118,102 @@ def save_6502_snapshot(request: SnapshotRequest):
 
 @app.post("/api/machines/usm-6502/snapshots/{name}/restore")
 def restore_6502_snapshot(name: str):
-    global machine_6502
+    global machine_6502, monitor_6502
     with machine_lock:
         try:
             candidate = SBC6502()
             result = workspace_6502.restore(candidate, name)
             machine_6502 = candidate
+            monitor_6502 = Monitor(candidate)
             return result
         except FileNotFoundError:
             raise HTTPException(404, "snapshot not found")
         except (RuntimeError, WorkspaceError, ValueError, KeyError, TypeError) as exc:
+            raise HTTPException(422, str(exc))
+
+class ImageLoad(BaseModel):
+    name: str
+    address: int | None = Field(default=None, ge=0, le=65535)
+    start: bool = True
+
+class BreakpointRequest(BaseModel):
+    address: int = Field(ge=0, le=65535)
+    enabled: bool = True
+
+class MemoryEdit(BaseModel):
+    address: int = Field(ge=0, le=65535)
+    value: int = Field(ge=0, le=255)
+
+def get_monitor():
+    global monitor_6502
+    machine = active_6502()
+    if monitor_6502 is None or monitor_6502.machine is not machine:
+        monitor_6502 = Monitor(machine)
+    return monitor_6502
+
+@app.get("/api/machines/usm-6502/monitor")
+def monitor_status():
+    with machine_lock:
+        return get_monitor().state()
+
+@app.post("/api/machines/usm-6502/monitor/reset")
+def monitor_reset():
+    with machine_lock:
+        return get_monitor().reset()
+
+@app.post("/api/machines/usm-6502/monitor/run")
+def monitor_run(request: StepRequest):
+    with machine_lock:
+        try:
+            return get_monitor().run(request.count)
+        except (RuntimeError, ValueError) as exc:
+            raise HTTPException(422, str(exc))
+
+@app.post("/api/machines/usm-6502/monitor/step")
+def monitor_step(request: StepRequest):
+    with machine_lock:
+        try:
+            return get_monitor().step(request.count)
+        except (RuntimeError, ValueError) as exc:
+            raise HTTPException(422, str(exc))
+
+@app.post("/api/machines/usm-6502/monitor/breakpoints")
+def monitor_breakpoint(request: BreakpointRequest):
+    with machine_lock:
+        return get_monitor().breakpoint(request.address, request.enabled)
+
+@app.get("/api/machines/usm-6502/monitor/memory")
+def monitor_memory(address: int = 0, count: int = 64):
+    with machine_lock:
+        try:
+            return get_monitor().inspect(address, count)
+        except ValueError as exc:
+            raise HTTPException(422, str(exc))
+
+@app.post("/api/machines/usm-6502/monitor/memory")
+def monitor_memory_write(request: MemoryEdit):
+    with machine_lock:
+        try:
+            return get_monitor().poke(request.address, request.value)
+        except ValueError as exc:
+            raise HTTPException(422, str(exc))
+
+@app.post("/api/machines/usm-6502/images/load")
+def load_6502_image(request: ImageLoad):
+    with machine_lock:
+        try:
+            import re
+            if not re.fullmatch(r"[A-Za-z0-9_-]+\\.(bin|prg|rom|d64|dsk|img)", request.name, re.I):
+                raise ValueError("invalid image filename")
+            path = workspace_6502.path / "software" / request.name
+            if path.is_symlink():
+                raise ValueError("symlink not allowed")
+            address, payload = parse_image(request.name, path.read_bytes(), request.address)
+            result = active_6502().load_program(payload, address, request.start)
+            return {"image": request.name, "format": request.name.rsplit(".", 1)[-1].lower(), **result}
+        except FileNotFoundError:
+            raise HTTPException(404, "image not found")
+        except (ValueError, RuntimeError) as exc:
             raise HTTPException(422, str(exc))
 
 class ProgramLoad(BaseModel):
@@ -143,10 +231,11 @@ class GPIOInput(BaseModel):
     value: int = Field(ge=0, le=255)
 
 def active_6502():
-    global machine_6502
+    global machine_6502, monitor_6502
     if machine_6502 is None:
         machine_6502 = SBC6502()
         machine_6502.boot()
+        monitor_6502 = Monitor(machine_6502)
     return machine_6502
 
 @app.post("/api/machines/usm-6502/load")
