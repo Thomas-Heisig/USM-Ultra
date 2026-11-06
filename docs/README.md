@@ -29,3 +29,9 @@ Bei Änderungen an Registeradressen, Busverhalten, Timing-Klassen oder Pinbelegu
 - [Roadmap und Meilensteine](../ROADMAP.md)
 - [Backend-Registry-Implementierung](../usm/backends.py)
 - [Backend-Fallback-Tests](../tests/test_backends.py)
+
+## Chipkatalog und API
+
+- [Chip- und Komponentenübersicht](CHIP_CATALOG.md)
+- [Virtual / Hybrid / Physical und Zeitklassen](MODES_AND_TIMING.md)
+- [Aktueller Implementierungsstatus](../STATUS.md)
