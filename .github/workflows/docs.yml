@@ -1,0 +1,29 @@
+name: Documentation validation
+on:
+  push:
+    paths:
+      - 'docs/**'
+      - 'README.md'
+      - '.github/workflows/docs.yml'
+  pull_request:
+    paths:
+      - 'docs/**'
+      - 'README.md'
+      - '.github/workflows/docs.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate required project documentation
+        run: |
+          test -s README.md
+          test -s docs/README.md
+          test -s docs/ARCHITECTURE.md
+          test -s docs/STUDIE_V7.md
+          test -s docs/VIRTUAL_FIRST.md
+          test -s SECURITY.md
+          test -s CONTRIBUTING.md
