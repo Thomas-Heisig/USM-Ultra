@@ -104,3 +104,7 @@ Install `pip install -e ".[6502,web,test]"`, then run `python -m usm.cli 6502` o
 ## MasterVisor frontend
 
 The responsive MasterVisor is the primary browser interface, with dedicated pages for dashboard, machines, chip modules, USP matrix, memory, task queue, trace, hardware, recovery, settings and documentation. See [MasterVisor manual](docs/MASTER_VISOR.md). The development server is localhost-only; hardware and recovery operations remain disabled until implemented.
+
+## Persistent machine workspaces
+
+MasterVisor now provides a private per-machine software directory and 6502 save/restore snapshots (CPU registers, RAM, UART and logical tick). See [workspace guide](docs/MACHINE_WORKSPACES.md). Program uploads are stored, **not executed**. Full computer emulation remains in development.
