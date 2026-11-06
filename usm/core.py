@@ -75,3 +75,31 @@ class Matrix:
         self.tick += cycles
         self.trace.append({"tick": self.tick, "source": tx.source, "address": tx.address, "error": error})
         return Response(value, cycles, error)
+
+class VirtualCPU:
+    """Bus-master stub; not an ISA emulator."""
+    def __init__(self, name, architecture, matrix):
+        self.name, self.architecture, self.matrix = name, architecture, matrix
+        self.operations = 0
+    def access(self, address, width=1, write=False, value=0):
+        if self.architecture == "m68000" and width > 1 and address % 2:
+            return Response(error="68000 address error")
+        result = self.matrix.transact(Transaction(self.name, address, width, write, value))
+        self.operations += 1
+        return result
+
+class Lab:
+    def __init__(self):
+        from .advanced import AtomicTaskQueue
+        self.matrix = Matrix()
+        self.ram = RAM(65536)
+        self.sid = RAM(32)
+        self.matrix.map(Mapping(0,65536,self.ram,"RAM"))
+        self.matrix.map(Mapping(0xD40000,32,self.sid,"SID-register-stub"))
+        self.scheduler = AtomicTaskQueue()
+        self.cpus = {"cpu0": VirtualCPU("cpu0","m68000",self.matrix),
+                     "cpu1": VirtualCPU("cpu1","z80",self.matrix)}
+    def status(self):
+        return {"tick": self.matrix.tick,
+                "windows": [{"name":m.name,"start":hex(m.start),"size":m.size} for m in self.matrix.mappings],
+                "cpus":{name:{"architecture":cpu.architecture,"operations":cpu.operations} for name,cpu in self.cpus.items()}}
