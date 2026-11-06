@@ -16,3 +16,9 @@
 ## Revisionsregel
 
 Bei Änderungen an Registeradressen, Busverhalten, Timing-Klassen oder Pinbelegungen muss der Bezug zur Studie überprüft und dokumentiert werden. Als TBD gekennzeichnete Werte dürfen nicht als verifiziert übernommen werden.
+
+## Code-Review und V0.3
+
+- [Tatsächlicher V0.2-Implementierungsstand und offene Fehler](CODE_REVIEW_V02.md)
+- [Musashi-C-Shim und ctypes-Integrationsplan](MUSASHI_INTEGRATION.md)
+- [Erweiterte V0.3-Vertragstests](../tests/test_v03_contracts.py)
