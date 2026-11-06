@@ -9,10 +9,12 @@ from threading import RLock
 from .machines.workspace import MachineWorkspace, WorkspaceError
 from .machines.sbc6502 import SBC6502
 from .machines.monitor6502 import Monitor, parse_image
+from .machines.basic_console import BasicConsole
 
 machine_lock = RLock()
 machine_6502 = None
 monitor_6502 = None
+basic_6502 = BasicConsole()
 workspace_6502 = MachineWorkspace()
 
 app=FastAPI(title="USM MasterVisor",version="0.2.0")
@@ -155,6 +157,22 @@ def run_6502_starter():
             result = monitor.run(1000)
             return {"load": load, "execution": result, "terminal": machine.uart.text()}
         except (ValueError, RuntimeError) as exc:
+            raise HTTPException(422, str(exc))
+
+class BasicLine(BaseModel):
+    text: str = Field(max_length=512)
+
+@app.get("/api/machines/usm-6502/basic")
+def basic_status():
+    with machine_lock:
+        return {"engine":"host_python_fallback_not_native_6502","listing":[f"{n} {basic_6502.program[n]}" for n in sorted(basic_6502.program)],"output":basic_6502.output[-200:],"variables":dict(basic_6502.variables)}
+
+@app.post("/api/machines/usm-6502/basic")
+def basic_submit(request: BasicLine):
+    with machine_lock:
+        try:
+            return {"engine":"host_python_fallback_not_native_6502",**basic_6502.submit(request.text)}
+        except (ValueError, SyntaxError, OverflowError, ZeroDivisionError) as exc:
             raise HTTPException(422, str(exc))
 
 class ImageLoad(BaseModel):
