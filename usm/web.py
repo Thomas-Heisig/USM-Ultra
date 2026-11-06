@@ -75,6 +75,20 @@ def docs_index():
         {"title":"V7-Studie (Kapitelübersicht)","path":"docs/STUDIE_V7.md","url":"https://github.com/Thomas-Heisig/USM-Ultra/blob/main/docs/STUDIE_V7.md"},
     ]
 
+@app.get("/api/machines")
+def machines():
+    return [{"id":"usm-6502","name":"USM-6502 SBC","backend":"py65","hardware":"not_probed","status":"experimental","description":"32 KiB RAM, 8 KiB ROM, synthetic UART; software-only"}]
+
+@app.post("/api/machines/usm-6502/run")
+def run_6502():
+    from .machines.sbc6502 import SBC6502
+    try:
+        machine=SBC6502()
+        result=machine.run()
+        return {"result": vars(result), "status": machine.status()}
+    except RuntimeError as exc:
+        raise HTTPException(503, str(exc))
+
 @app.get("/api/components")
 def list_components(family: str | None = None):
     return components(family)
@@ -140,6 +154,9 @@ button{cursor:pointer;background:#236da3}pre{white-space:pre-wrap;overflow-wrap:
 <button id="saveSettings">Einstellungen speichern</button>
 </div><p id="settingsMessage" role="status" class="muted"></p></section>
 <section class="panel"><h2>Dokumentation</h2><div id="docsLinks" class="controls"></div><p class="muted">V7-Volltext-DOCX ist noch nicht im Repository. Die Studienübersicht ist abrufbar.</p></section>
+<section class="panel"><h2>USM-6502 – erstes virtuelles Zielsystem</h2>
+<p class="muted">6502-CPU (py65), 32 KiB RAM, 8 KiB ROM und synthetische UART. Noch kein interaktiver Monitor.</p>
+<button id="run6502">6502-ROM starten</button><pre id="machine6502">Noch nicht gestartet.</pre></section>
 <section class="panel"><h2>Virtuelle USP-Matrix</h2><pre id="status"></pre></section>
 <section class="panel"><h2>Bus-Trace</h2><button id="demo">68000-Demozugriff</button><pre id="trace"></pre></section>
 </main><script>
@@ -167,6 +184,14 @@ async function refresh(){
  document.getElementById("status").textContent=JSON.stringify(await s.json(),null,2);
  document.getElementById("trace").textContent=JSON.stringify(await t.json(),null,2);
 }
+document.getElementById("run6502").addEventListener("click",async()=>{
+ const display=document.getElementById("machine6502");display.textContent="Starte virtuellen 6502...";
+ try{
+  const r=await fetch("/api/machines/usm-6502/run",{method:"POST"});
+  const data=await r.json();
+  display.textContent=r.ok?JSON.stringify(data,null,2):"Fehler: "+JSON.stringify(data);
+ }catch(e){display.textContent="Verbindung fehlgeschlagen: "+e.message}
+});
 async function loadSettings(){
  const s=await (await fetch("/api/settings")).json();
  document.getElementById("mode").value=s.mode;
