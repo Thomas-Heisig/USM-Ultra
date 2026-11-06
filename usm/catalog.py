@@ -41,7 +41,7 @@ _COMPONENTS = (
     Component("i8088", "Intel 8088", "CPU", "8-bit external x86 CPU"),
     Component("i80286", "Intel 80286", "CPU", "Protected-mode x86 CPU"),
     Component("z80", "Zilog Z80", "CPU", "8-bit CPU", Implementation.STUB, notes="Bus master stub only"),
-    Component("mos6502", "MOS 6502", "CPU", "8-bit CPU"),
+    Component("mos6502", "MOS 6502", "CPU", "8-bit CPU", Implementation.EMULATED, notes="Optional py65 backend; USM-6502 SBC partial, not full historical machine"),
     Component("mos6510", "MOS 6510", "CPU", "C64 CPU"),
     Component("w65c02", "WDC 65C02", "CPU", "CMOS 6502"),
     Component("sid6581", "MOS SID 6581", "Audio", "C64 sound chip", Implementation.STUB, notes="32-byte register stub, no audio"),
