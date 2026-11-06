@@ -5,6 +5,13 @@ from .core import Lab
 from .catalog import components, component, summary
 from .settings import SettingsStore, SettingsError
 from collections import deque
+from threading import RLock
+from .machines.workspace import MachineWorkspace, WorkspaceError
+from .machines.sbc6502 import SBC6502
+
+machine_lock = RLock()
+machine_6502 = None
+workspace_6502 = MachineWorkspace()
 
 app=FastAPI(title="USM MasterVisor",version="0.2.0")
 lab=Lab()
@@ -75,17 +82,65 @@ def docs_index():
         {"title":"V7-Studie (Kapitelübersicht)","path":"docs/STUDIE_V7.md","url":"https://github.com/Thomas-Heisig/USM-Ultra/blob/main/docs/STUDIE_V7.md"},
     ]
 
+class SnapshotRequest(BaseModel):
+    name: str = Field(min_length=1, max_length=64)
+
+class SoftwareRequest(BaseModel):
+    name: str = Field(min_length=1, max_length=80)
+    hex_data: str = Field(min_length=2, max_length=2097152)
+
+@app.get("/api/machines/usm-6502/workspace")
+def get_6502_workspace():
+    with machine_lock:
+        return {"machine": "usm-6502", "software": workspace_6502.software(), "snapshots": workspace_6502.snapshots(), "running": machine_6502 is not None, "status": machine_6502.status() if machine_6502 else None}
+
+@app.post("/api/machines/usm-6502/software")
+def upload_6502_software(request: SoftwareRequest):
+    try:
+        payload = bytes.fromhex(request.hex_data)
+        return workspace_6502.add_software(request.name, payload)
+    except (WorkspaceError, ValueError) as exc:
+        raise HTTPException(422, str(exc))
+
+@app.post("/api/machines/usm-6502/snapshots")
+def save_6502_snapshot(request: SnapshotRequest):
+    global machine_6502
+    with machine_lock:
+        try:
+            if machine_6502 is None:
+                machine_6502 = SBC6502()
+                machine_6502.boot()
+            return workspace_6502.save(machine_6502, request.name)
+        except (RuntimeError, WorkspaceError) as exc:
+            raise HTTPException(422, str(exc))
+
+@app.post("/api/machines/usm-6502/snapshots/{name}/restore")
+def restore_6502_snapshot(name: str):
+    global machine_6502
+    with machine_lock:
+        try:
+            candidate = SBC6502()
+            result = workspace_6502.restore(candidate, name)
+            machine_6502 = candidate
+            return result
+        except FileNotFoundError:
+            raise HTTPException(404, "snapshot not found")
+        except (RuntimeError, WorkspaceError, ValueError, KeyError, TypeError) as exc:
+            raise HTTPException(422, str(exc))
+
 @app.get("/api/machines")
 def machines():
     return [{"id":"usm-6502","name":"USM-6502 SBC","backend":"py65","hardware":"not_probed","status":"experimental","description":"32 KiB RAM, 8 KiB ROM, synthetic UART; software-only"}]
 
 @app.post("/api/machines/usm-6502/run")
 def run_6502():
-    from .machines.sbc6502 import SBC6502
+    global machine_6502
     try:
-        machine=SBC6502()
-        result=machine.run()
-        return {"result": vars(result), "status": machine.status()}
+        with machine_lock:
+            if machine_6502 is None:
+                machine_6502=SBC6502()
+            result=machine_6502.run()
+            return {"result": vars(result), "status": machine_6502.status()}
     except RuntimeError as exc:
         raise HTTPException(503, str(exc))
 
