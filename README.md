@@ -108,3 +108,7 @@ The responsive MasterVisor is the primary browser interface, with dedicated page
 ## Persistent machine workspaces
 
 MasterVisor now provides a private per-machine software directory and 6502 save/restore snapshots (CPU registers, RAM, UART and logical tick). See [workspace guide](docs/MACHINE_WORKSPACES.md). Program uploads are stored, **not executed**. Full computer emulation remains in development.
+
+## MOS 6502 reference ecosystem
+
+[6502 architecture, upstream emulator/FPGA/toolchain references and machine profiles](docs/MOS_6502_REFERENCE.md). Curated reference API: `/api/6502/sources` and `/api/6502/system-profiles`. External source code and copyrighted ROMs are not vendored.
