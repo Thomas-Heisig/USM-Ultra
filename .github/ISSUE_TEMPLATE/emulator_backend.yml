@@ -1,0 +1,23 @@
+name: Emulator backend request
+description: Propose a software CPU or peripheral backend
+title: "[Backend] "
+labels: ["emulation"]
+body:
+  - type: input
+    id: component
+    attributes:
+      label: CPU or peripheral
+    validations:
+      required: true
+  - type: textarea
+    id: upstream
+    attributes:
+      label: Upstream project, revision and license
+    validations:
+      required: true
+  - type: textarea
+    id: tests
+    attributes:
+      label: Functional test vectors and expected compatibility
+    validations:
+      required: true
