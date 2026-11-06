@@ -96,3 +96,7 @@ Original project: Thomas Heisig. Copyright © 2026 Thomas Heisig. All rights res
 ## MasterVisor settings
 
 The dashboard now exposes local settings, capability flags and a documentation directory. See [settings guide](docs/SETTINGS.md). Hybrid and physical modes remain disabled until real backends exist.
+
+## First executable target: USM-6502
+
+Install `pip install -e ".[6502,web,test]"`, then run `python -m usm.cli 6502` or use **6502-ROM starten** in MasterVisor. This is a minimal 6502 SBC ROM/UART boot demo, **not** a complete interactive monitor or a C64/Apple II emulator. [Machine specification](docs/USM_6502.md).
