@@ -144,3 +144,7 @@ Danach MasterVisor unter http://127.0.0.1:8000 öffnen. Die Installation von py6
 ## Rechte und Grenzen
 
 Das Repository ist privat und die Projektlizenz proprietär. Fremde Open-Source-Projekte werden als Referenzen katalogisiert, aber ohne gesonderte Lizenzprüfung nicht automatisch eingebunden. Original-ROMs und Diskettenabbilder werden nicht in Git veröffentlicht. Der Betrieb soll dauerhaft auch ohne physische Hardware möglich bleiben.
+
+## Öffentlicher MasterVisor (GitHub Pages)
+
+Die [statische Online-Demo](https://thomas-heisig.github.io/USM-Ultra/) wird aus `docs/index.html` mit [GitHub Actions](.github/workflows/pages.yml) veröffentlicht, **sobald GitHub Pages in den Repository-Einstellungen auf GitHub Actions gestellt und ein Deployment erfolgreich abgeschlossen wurde**. Sie enthält eine browserseitige BASIC-Demo und den Modulstatus, jedoch noch keine serverseitige 6502-CPU-Emulation. [Aktivierung und Sicherheitsgrenzen](docs/ONLINE_DEPLOYMENT.md).
