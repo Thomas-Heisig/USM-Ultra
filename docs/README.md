@@ -22,3 +22,10 @@ Bei Änderungen an Registeradressen, Busverhalten, Timing-Klassen oder Pinbelegu
 - [Tatsächlicher V0.2-Implementierungsstand und offene Fehler](CODE_REVIEW_V02.md)
 - [Musashi-C-Shim und ctypes-Integrationsplan](MUSASHI_INTEGRATION.md)
 - [Erweiterte V0.3-Vertragstests](../tests/test_v03_contracts.py)
+
+## Virtual-first / Hybrid
+
+- [Verbindliche Software-only- und Hybrid-Architektur](VIRTUAL_FIRST.md)
+- [Roadmap und Meilensteine](../ROADMAP.md)
+- [Backend-Registry-Implementierung](../usm/backends.py)
+- [Backend-Fallback-Tests](../tests/test_backends.py)
