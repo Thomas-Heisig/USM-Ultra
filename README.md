@@ -90,3 +90,5 @@ MasterVisor: http://127.0.0.1:8000 (localhost development only). API schema: htt
 ## Credits and licensing
 
 Original project: Thomas Heisig. Copyright © 2026 Thomas Heisig. All rights reserved. This private repository does not grant a public open-source license. Musashi, Hatari, WinUAE, MAME and Z80 projects are prospective integrations or references; none is automatically bundled. Their upstream licenses and notices must be respected.
+
+- [Current implementation status](STATUS.md) · [Chip inventory](docs/CHIP_CATALOG.md) · [Operating modes and timing](docs/MODES_AND_TIMING.md)
