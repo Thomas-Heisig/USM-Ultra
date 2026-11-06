@@ -76,6 +76,8 @@ def capabilities():
 @app.get("/api/docs-index")
 def docs_index():
     return [
+        {"title":"6502 Monitor und Image Loader","path":"docs/MONITOR_6502.md","url":"https://github.com/Thomas-Heisig/USM-Ultra/blob/main/docs/MONITOR_6502.md"},
+        {"title":"6502 Peripherie","path":"docs/PERIPHERALS_6502.md","url":"https://github.com/Thomas-Heisig/USM-Ultra/blob/main/docs/PERIPHERALS_6502.md"},
         {"title":"Projektstatus","path":"STATUS.md","url":"https://github.com/Thomas-Heisig/USM-Ultra/blob/main/STATUS.md"},
         {"title":"Einstellungen","path":"docs/SETTINGS.md","url":"https://github.com/Thomas-Heisig/USM-Ultra/blob/main/docs/SETTINGS.md"},
         {"title":"Chipkatalog","path":"docs/CHIP_CATALOG.md","url":"https://github.com/Thomas-Heisig/USM-Ultra/blob/main/docs/CHIP_CATALOG.md"},
