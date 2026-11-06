@@ -134,6 +134,16 @@ def restore_6502_snapshot(name: str):
         except (RuntimeError, WorkspaceError, ValueError, KeyError, TypeError) as exc:
             raise HTTPException(422, str(exc))
 
+@app.get("/api/6502/sources")
+def sources_6502():
+    from .machines.catalog6502 import SOURCES
+    return SOURCES
+
+@app.get("/api/6502/system-profiles")
+def profiles_6502():
+    from .machines.catalog6502 import SYSTEMS
+    return SYSTEMS
+
 class ImageLoad(BaseModel):
     name: str
     address: int | None = Field(default=None, ge=0, le=65535)
