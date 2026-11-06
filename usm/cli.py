@@ -3,7 +3,7 @@ from .core import Lab
 
 def main():
     parser=argparse.ArgumentParser(description="USM-Ultra virtual lab")
-    parser.add_argument("command",choices=["demo","status","web"])
+    parser.add_argument("command",choices=["demo","status","web","6502"])
     parser.add_argument("--host",default="127.0.0.1")
     parser.add_argument("--port",type=int,default=8000)
     args=parser.parse_args()
@@ -13,6 +13,11 @@ def main():
         print(vars(lab.cpus["cpu0"].access(256,2)))
     elif args.command=="status":
         print(json.dumps(lab.status(),indent=2))
+    elif args.command=="6502":
+        from .machines.sbc6502 import SBC6502
+        machine=SBC6502()
+        result=machine.run()
+        print(json.dumps(vars(result), indent=2))
     else:
         try:
             import uvicorn
