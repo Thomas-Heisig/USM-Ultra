@@ -9,7 +9,13 @@
       "family": "CPU",
       "role": "16/32-bit CISC CPU",
       "implementation": "stub",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "16/32-Bit",
+        "interface": "24-Bit Adressbus",
+        "description": "32-Bit-Register, 16-Bit externer Datenbus und 24-Bit Adressierung."
+      },
+      "integration": "Teilimplementierung; keine vollständige Funktion garantiert."
     },
     {
       "id": "m68010",
@@ -17,7 +23,13 @@
       "family": "CPU",
       "role": "68k CPU",
       "implementation": "not_implemented",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "CPU",
+        "interface": "Abhängig vom Systemprofil",
+        "description": "68k CPU"
+      },
+      "integration": "Geplantes Modul; derzeit nicht ausführbar."
     },
     {
       "id": "m68020",
@@ -25,7 +37,13 @@
       "family": "CPU",
       "role": "32-bit 68k CPU",
       "implementation": "not_implemented",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "CPU",
+        "interface": "Abhängig vom Systemprofil",
+        "description": "32-bit 68k CPU"
+      },
+      "integration": "Geplantes Modul; derzeit nicht ausführbar."
     },
     {
       "id": "m68030",
@@ -33,7 +51,13 @@
       "family": "CPU",
       "role": "MMU 68k CPU",
       "implementation": "not_implemented",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "CPU",
+        "interface": "Abhängig vom Systemprofil",
+        "description": "MMU 68k CPU"
+      },
+      "integration": "Geplantes Modul; derzeit nicht ausführbar."
     },
     {
       "id": "m68040",
@@ -41,7 +65,13 @@
       "family": "CPU",
       "role": "68k CPU with FPU",
       "implementation": "not_implemented",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "CPU",
+        "interface": "Abhängig vom Systemprofil",
+        "description": "68k CPU with FPU"
+      },
+      "integration": "Geplantes Modul; derzeit nicht ausführbar."
     },
     {
       "id": "m68060",
@@ -49,7 +79,13 @@
       "family": "CPU",
       "role": "68k CPU",
       "implementation": "not_implemented",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "CPU",
+        "interface": "Abhängig vom Systemprofil",
+        "description": "68k CPU"
+      },
+      "integration": "Geplantes Modul; derzeit nicht ausführbar."
     },
     {
       "id": "i8086",
@@ -57,7 +93,13 @@
       "family": "CPU",
       "role": "16-bit x86 CPU",
       "implementation": "not_implemented",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "16-Bit",
+        "interface": "20-Bit Adressbus",
+        "description": "Segmentierte Adressierung, bis zu 1 MiB physischer Adressraum."
+      },
+      "integration": "Geplantes Modul; derzeit nicht ausführbar."
     },
     {
       "id": "i8088",
@@ -65,7 +107,13 @@
       "family": "CPU",
       "role": "8-bit external x86 CPU",
       "implementation": "not_implemented",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "8/16-Bit",
+        "interface": "20-Bit Adressbus",
+        "description": "8086-verwandte Architektur mit 8-Bit externem Datenbus."
+      },
+      "integration": "Geplantes Modul; derzeit nicht ausführbar."
     },
     {
       "id": "i80286",
@@ -73,7 +121,13 @@
       "family": "CPU",
       "role": "Protected-mode x86 CPU",
       "implementation": "not_implemented",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "CPU",
+        "interface": "Abhängig vom Systemprofil",
+        "description": "Protected-mode x86 CPU"
+      },
+      "integration": "Geplantes Modul; derzeit nicht ausführbar."
     },
     {
       "id": "z80",
@@ -81,7 +135,13 @@
       "family": "CPU",
       "role": "8-bit CPU",
       "implementation": "stub",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "8-Bit",
+        "interface": "16-Bit Adressbus",
+        "description": "Z80 mit 8-Bit-Datenbus, 16-Bit-Adressbus und Interrupt-Modi."
+      },
+      "integration": "Teilimplementierung; keine vollständige Funktion garantiert."
     },
     {
       "id": "mos6502",
@@ -89,7 +149,13 @@
       "family": "CPU",
       "role": "8-bit CPU",
       "implementation": "emulated",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "8-Bit",
+        "interface": "16-Bit Adressbus",
+        "description": "NMOS 6502; 64 KiB linearer Adressraum; kein integrierter MMU."
+      },
+      "integration": "Softwaremodell vorhanden; genaue Integration hängt vom Backend ab."
     },
     {
       "id": "mos6510",
@@ -97,7 +163,13 @@
       "family": "CPU",
       "role": "C64 CPU",
       "implementation": "not_implemented",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "8-Bit",
+        "interface": "16-Bit Adressbus",
+        "description": "6502-verwandte CPU mit integriertem 6-Bit-I/O-Port; typischer C64-Hauptprozessor."
+      },
+      "integration": "Geplantes Modul; derzeit nicht ausführbar."
     },
     {
       "id": "w65c02",
@@ -105,7 +177,13 @@
       "family": "CPU",
       "role": "CMOS 6502",
       "implementation": "not_implemented",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "CPU",
+        "interface": "Abhängig vom Systemprofil",
+        "description": "CMOS 6502"
+      },
+      "integration": "Geplantes Modul; derzeit nicht ausführbar."
     },
     {
       "id": "sid6581",
@@ -113,7 +191,13 @@
       "family": "Audio",
       "role": "C64 sound chip",
       "implementation": "stub",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "Audio",
+        "interface": "29 interne Register (32 Adresspositionen)",
+        "description": "Drei Stimmen, Filter und Hüllkurven; klangliche Emulation fehlt."
+      },
+      "integration": "Teilimplementierung; keine vollständige Funktion garantiert."
     },
     {
       "id": "sid8580",
@@ -121,7 +205,13 @@
       "family": "Audio",
       "role": "C64 sound chip",
       "implementation": "not_implemented",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "Audio",
+        "interface": "Abhängig vom Systemprofil",
+        "description": "C64 sound chip"
+      },
+      "integration": "Geplantes Modul; derzeit nicht ausführbar."
     },
     {
       "id": "paula",
@@ -129,7 +219,13 @@
       "family": "Audio",
       "role": "Audio, disk and I/O DMA",
       "implementation": "not_implemented",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "Audio/DMA",
+        "interface": "Amiga-Chipsatz",
+        "description": "Vierkanal-PCM-Audio sowie Disketten-/Interruptfunktionen."
+      },
+      "integration": "Geplantes Modul; derzeit nicht ausführbar."
     },
     {
       "id": "agnus",
@@ -137,7 +233,13 @@
       "family": "Video/DMA",
       "role": "DMA, blitter and chip RAM control",
       "implementation": "not_implemented",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "Video/DMA",
+        "interface": "Amiga-Chipsatz",
+        "description": "DMA-Arbitrierung, Blitter und Copper im OCS-Chipsatz."
+      },
+      "integration": "Geplantes Modul; derzeit nicht ausführbar."
     },
     {
       "id": "denise",
@@ -145,7 +247,13 @@
       "family": "Video",
       "role": "Display pipeline",
       "implementation": "not_implemented",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "Video",
+        "interface": "Amiga-Chipsatz",
+        "description": "OCS-Bildausgabe und Sprite-/Playfield-Logik."
+      },
+      "integration": "Geplantes Modul; derzeit nicht ausführbar."
     },
     {
       "id": "alice",
@@ -153,7 +261,13 @@
       "family": "Video/DMA",
       "role": "AGA DMA controller",
       "implementation": "not_implemented",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "Video/DMA",
+        "interface": "Abhängig vom Systemprofil",
+        "description": "AGA DMA controller"
+      },
+      "integration": "Geplantes Modul; derzeit nicht ausführbar."
     },
     {
       "id": "lisa",
@@ -161,7 +275,13 @@
       "family": "Video",
       "role": "AGA display chip",
       "implementation": "not_implemented",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "Video",
+        "interface": "Abhängig vom Systemprofil",
+        "description": "AGA display chip"
+      },
+      "integration": "Geplantes Modul; derzeit nicht ausführbar."
     },
     {
       "id": "gary",
@@ -169,7 +289,13 @@
       "family": "System",
       "role": "Bus control and decoding",
       "implementation": "not_implemented",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "System",
+        "interface": "Abhängig vom Systemprofil",
+        "description": "Bus control and decoding"
+      },
+      "integration": "Geplantes Modul; derzeit nicht ausführbar."
     },
     {
       "id": "cia8520a",
@@ -177,7 +303,13 @@
       "family": "I/O",
       "role": "Amiga timers, ports, interrupts",
       "implementation": "not_implemented",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "I/O",
+        "interface": "Abhängig vom Systemprofil",
+        "description": "Amiga timers, ports, interrupts"
+      },
+      "integration": "Geplantes Modul; derzeit nicht ausführbar."
     },
     {
       "id": "cia8520b",
@@ -185,7 +317,13 @@
       "family": "I/O",
       "role": "Amiga timers, ports, interrupts",
       "implementation": "not_implemented",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "I/O",
+        "interface": "Abhängig vom Systemprofil",
+        "description": "Amiga timers, ports, interrupts"
+      },
+      "integration": "Geplantes Modul; derzeit nicht ausführbar."
     },
     {
       "id": "vicii",
@@ -193,7 +331,13 @@
       "family": "Video",
       "role": "C64 video controller",
       "implementation": "not_implemented",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "Video",
+        "interface": "Register-mapped I/O",
+        "description": "C64-Videochip für Text-/Bitmapmodi, Sprites und Rasterinterrupts."
+      },
+      "integration": "Geplantes Modul; derzeit nicht ausführbar."
     },
     {
       "id": "cia6526a",
@@ -201,7 +345,13 @@
       "family": "I/O",
       "role": "C64 I/O and timers",
       "implementation": "not_implemented",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "I/O",
+        "interface": "Register-mapped I/O",
+        "description": "Zwei 8-Bit-Ports, Timer A/B, TOD-Uhr, Interrupts und serieller Port."
+      },
+      "integration": "Geplantes Modul; derzeit nicht ausführbar."
     },
     {
       "id": "cia6526b",
@@ -209,7 +359,13 @@
       "family": "I/O",
       "role": "C64 I/O and timers",
       "implementation": "not_implemented",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "I/O",
+        "interface": "Register-mapped I/O",
+        "description": "Zweiter C64-CIA für Peripherie und Systemsignale."
+      },
+      "integration": "Geplantes Modul; derzeit nicht ausführbar."
     },
     {
       "id": "ym2149",
@@ -217,7 +373,13 @@
       "family": "Audio",
       "role": "Atari ST PSG",
       "implementation": "not_implemented",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "Audio",
+        "interface": "Abhängig vom Systemprofil",
+        "description": "Atari ST PSG"
+      },
+      "integration": "Geplantes Modul; derzeit nicht ausführbar."
     },
     {
       "id": "ay38910",
@@ -225,7 +387,13 @@
       "family": "Audio",
       "role": "Programmable sound generator",
       "implementation": "not_implemented",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "Audio",
+        "interface": "Abhängig vom Systemprofil",
+        "description": "Programmable sound generator"
+      },
+      "integration": "Geplantes Modul; derzeit nicht ausführbar."
     },
     {
       "id": "shifter",
@@ -233,7 +401,13 @@
       "family": "Video",
       "role": "Display controller",
       "implementation": "not_implemented",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "Video",
+        "interface": "Abhängig vom Systemprofil",
+        "description": "Display controller"
+      },
+      "integration": "Geplantes Modul; derzeit nicht ausführbar."
     },
     {
       "id": "glue",
@@ -241,7 +415,13 @@
       "family": "System",
       "role": "Timing and bus control",
       "implementation": "not_implemented",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "System",
+        "interface": "Abhängig vom Systemprofil",
+        "description": "Timing and bus control"
+      },
+      "integration": "Geplantes Modul; derzeit nicht ausführbar."
     },
     {
       "id": "mmu_st",
@@ -249,7 +429,13 @@
       "family": "Memory",
       "role": "ST memory controller",
       "implementation": "not_implemented",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "Memory",
+        "interface": "Abhängig vom Systemprofil",
+        "description": "ST memory controller"
+      },
+      "integration": "Geplantes Modul; derzeit nicht ausführbar."
     },
     {
       "id": "wd1772",
@@ -257,7 +443,13 @@
       "family": "Storage",
       "role": "Floppy controller",
       "implementation": "not_implemented",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "Storage",
+        "interface": "Floppy Controller",
+        "description": "Diskettencontroller, u.a. in Atari-ST-Systemen."
+      },
+      "integration": "Geplantes Modul; derzeit nicht ausführbar."
     },
     {
       "id": "mfp68901",
@@ -265,7 +457,13 @@
       "family": "I/O",
       "role": "Multi-function peripheral",
       "implementation": "not_implemented",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "I/O",
+        "interface": "Abhängig vom Systemprofil",
+        "description": "Multi-function peripheral"
+      },
+      "integration": "Geplantes Modul; derzeit nicht ausführbar."
     },
     {
       "id": "acia6850",
@@ -273,7 +471,13 @@
       "family": "I/O",
       "role": "Serial interface",
       "implementation": "not_implemented",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "I/O",
+        "interface": "Abhängig vom Systemprofil",
+        "description": "Serial interface"
+      },
+      "integration": "Geplantes Modul; derzeit nicht ausführbar."
     },
     {
       "id": "ram",
@@ -281,7 +485,13 @@
       "family": "Memory",
       "role": "Byte-addressable RAM",
       "implementation": "emulated",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "Memory",
+        "interface": "Konfigurierbar",
+        "description": "Byteadressierbarer virtueller Arbeitsspeicher."
+      },
+      "integration": "Softwaremodell vorhanden; genaue Integration hängt vom Backend ab."
     },
     {
       "id": "rom",
@@ -289,7 +499,13 @@
       "family": "Memory",
       "role": "Read-only memory",
       "implementation": "emulated",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "Memory",
+        "interface": "Konfigurierbar",
+        "description": "Schreibgeschützter virtueller Speicher für Firmware/Bootcode."
+      },
+      "integration": "Softwaremodell vorhanden; genaue Integration hängt vom Backend ab."
     },
     {
       "id": "usp",
@@ -297,7 +513,13 @@
       "family": "Infrastructure",
       "role": "Virtual bus and memory windows",
       "implementation": "emulated",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "Infrastructure",
+        "interface": "Abhängig vom Systemprofil",
+        "description": "Virtual bus and memory windows"
+      },
+      "integration": "Softwaremodell vorhanden; genaue Integration hängt vom Backend ab."
     },
     {
       "id": "task_queue",
@@ -305,7 +527,13 @@
       "family": "Infrastructure",
       "role": "Lock-protected task claims",
       "implementation": "emulated",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "Infrastructure",
+        "interface": "Abhängig vom Systemprofil",
+        "description": "Lock-protected task claims"
+      },
+      "integration": "Softwaremodell vorhanden; genaue Integration hängt vom Backend ab."
     },
     {
       "id": "fpga_bridge",
@@ -313,7 +541,13 @@
       "family": "Hardware",
       "role": "Future physical bridge",
       "implementation": "not_implemented",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "Hardware",
+        "interface": "Abhängig vom Systemprofil",
+        "description": "Future physical bridge"
+      },
+      "integration": "Geplantes Modul; derzeit nicht ausführbar."
     },
     {
       "id": "recovery_flux",
@@ -321,7 +555,13 @@
       "family": "Recovery",
       "role": "Read-data timestamp capture",
       "implementation": "not_implemented",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "Recovery",
+        "interface": "Abhängig vom Systemprofil",
+        "description": "Read-data timestamp capture"
+      },
+      "integration": "Geplantes Modul; derzeit nicht ausführbar."
     },
     {
       "id": "recovery_analog",
@@ -329,7 +569,13 @@
       "family": "Recovery",
       "role": "Raw head analog acquisition",
       "implementation": "not_implemented",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "Recovery",
+        "interface": "Abhängig vom Systemprofil",
+        "description": "Raw head analog acquisition"
+      },
+      "integration": "Geplantes Modul; derzeit nicht ausführbar."
     },
     {
       "id": "ethernet_bridge",
@@ -337,7 +583,13 @@
       "family": "Hardware",
       "role": "Future hardware transport",
       "implementation": "not_implemented",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "Hardware",
+        "interface": "Abhängig vom Systemprofil",
+        "description": "Future hardware transport"
+      },
+      "integration": "Geplantes Modul; derzeit nicht ausführbar."
     },
     {
       "id": "usb_bridge",
@@ -345,7 +597,13 @@
       "family": "Hardware",
       "role": "Future hardware transport",
       "implementation": "not_implemented",
-      "hardware": "not_probed"
+      "hardware": "not_probed",
+      "technical": {
+        "class": "Hardware",
+        "interface": "Abhängig vom Systemprofil",
+        "description": "Future hardware transport"
+      },
+      "integration": "Geplantes Modul; derzeit nicht ausführbar."
     },
     {
       "id": "usm6502",
@@ -353,7 +611,13 @@
       "family": "Machine",
       "role": "Virtueller 6502-Einplatinencomputer",
       "implementation": "emulated",
-      "hardware": "not_present"
+      "hardware": "not_present",
+      "technical": {
+        "class": "Machine",
+        "interface": "Abhängig vom Systemprofil",
+        "description": "Virtueller 6502-Einplatinencomputer"
+      },
+      "integration": "Softwaremodell vorhanden; genaue Integration hängt vom Backend ab."
     },
     {
       "id": "uart6502",
@@ -361,7 +625,13 @@
       "family": "I/O",
       "role": "Virtuelle serielle Ein-/Ausgabe",
       "implementation": "emulated",
-      "hardware": "not_present"
+      "hardware": "not_present",
+      "technical": {
+        "class": "I/O",
+        "interface": "Abhängig vom Systemprofil",
+        "description": "Virtuelle serielle Ein-/Ausgabe"
+      },
+      "integration": "Softwaremodell vorhanden; genaue Integration hängt vom Backend ab."
     },
     {
       "id": "timer6502",
@@ -369,7 +639,13 @@
       "family": "I/O",
       "role": "Virtueller Timer",
       "implementation": "emulated",
-      "hardware": "not_present"
+      "hardware": "not_present",
+      "technical": {
+        "class": "I/O",
+        "interface": "Abhängig vom Systemprofil",
+        "description": "Virtueller Timer"
+      },
+      "integration": "Softwaremodell vorhanden; genaue Integration hängt vom Backend ab."
     },
     {
       "id": "gpio6502",
@@ -377,7 +653,14 @@
       "family": "I/O",
       "role": "Virtuelle GPIO",
       "implementation": "emulated",
-      "hardware": "not_present"
+      "hardware": "not_present",
+      "technical": {
+        "class": "I/O",
+        "interface": "Abhängig vom Systemprofil",
+        "description": "Virtuelle GPIO"
+      },
+      "integration": "Softwaremodell vorhanden; genaue Integration hängt vom Backend ab."
     }
-  ]
+  ],
+  "version": "2026-11-06"
 }
