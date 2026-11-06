@@ -33,7 +33,7 @@ class MachineWorkspace:
         return sorted({"name": p.name, "bytes": p.stat().st_size} for p in (self.path / "software").iterdir() if p.is_file() and not p.is_symlink())
 
     def add_software(self, name, content):
-        if not IDENTIFIER.fullmatch(name.rsplit(".", 1)[0]) or not re.fullmatch(r"[a-zA-Z0-9_-]+\\.(bin|prg|rom)", name):
+        if not IDENTIFIER.fullmatch(name.rsplit(".", 1)[0]) or not re.fullmatch(r"[a-zA-Z0-9_-]+\.(bin|prg|rom)", name):
             raise WorkspaceError("invalid software filename")
         if len(content) > 1048576:
             raise WorkspaceError("software exceeds 1 MiB")
