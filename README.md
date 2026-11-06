@@ -100,3 +100,7 @@ The dashboard now exposes local settings, capability flags and a documentation d
 ## First executable target: USM-6502
 
 Install `pip install -e ".[6502,web,test]"`, then run `python -m usm.cli 6502` or use **6502-ROM starten** in MasterVisor. This is a minimal 6502 SBC ROM/UART boot demo, **not** a complete interactive monitor or a C64/Apple II emulator. [Machine specification](docs/USM_6502.md).
+
+## MasterVisor frontend
+
+The responsive MasterVisor is the primary browser interface, with dedicated pages for dashboard, machines, chip modules, USP matrix, memory, task queue, trace, hardware, recovery, settings and documentation. See [MasterVisor manual](docs/MASTER_VISOR.md). The development server is localhost-only; hardware and recovery operations remain disabled until implemented.
