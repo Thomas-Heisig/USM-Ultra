@@ -144,6 +144,19 @@ def profiles_6502():
     from .machines.catalog6502 import SYSTEMS
     return SYSTEMS
 
+@app.post("/api/machines/usm-6502/starter")
+def run_6502_starter():
+    from .machines.starter6502 import install_hello
+    with machine_lock:
+        try:
+            machine = active_6502()
+            load = install_hello(machine)
+            monitor = get_monitor()
+            result = monitor.run(1000)
+            return {"load": load, "execution": result, "terminal": machine.uart.text()}
+        except (ValueError, RuntimeError) as exc:
+            raise HTTPException(422, str(exc))
+
 class ImageLoad(BaseModel):
     name: str
     address: int | None = Field(default=None, ge=0, le=65535)
