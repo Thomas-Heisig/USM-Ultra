@@ -1,0 +1,17 @@
+name: Feature-Vorschlag
+description: Erweiterung der USM-Matrix vorschlagen
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: usecase
+    attributes:
+      label: Anwendungsfall
+    validations:
+      required: true
+  - type: textarea
+    id: design
+    attributes:
+      label: Schnittstellen und Akzeptanzkriterien
+    validations:
+      required: true
