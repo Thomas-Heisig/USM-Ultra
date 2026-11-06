@@ -35,3 +35,9 @@ Bei Änderungen an Registeradressen, Busverhalten, Timing-Klassen oder Pinbelegu
 - [Chip- und Komponentenübersicht](CHIP_CATALOG.md)
 - [Virtual / Hybrid / Physical und Zeitklassen](MODES_AND_TIMING.md)
 - [Aktueller Implementierungsstatus](../STATUS.md)
+
+## MasterVisor Full-Stack
+
+- [Einstellungen, Persistenz und REST-API](SETTINGS.md)
+- [MasterVisor Web API](../usm/web.py)
+- [API-Einstellungen und Integrationstests](../tests/test_settings_api.py)
