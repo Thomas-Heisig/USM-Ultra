@@ -1,0 +1,383 @@
+{
+  "schema": 1,
+  "generatedFrom": "usm/catalog.py",
+  "notice": "Statische Momentaufnahme; Backend bleibt maßgeblich",
+  "components": [
+    {
+      "id": "m68000",
+      "name": "Motorola MC68000",
+      "family": "CPU",
+      "role": "16/32-bit CISC CPU",
+      "implementation": "stub",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "m68010",
+      "name": "Motorola MC68010",
+      "family": "CPU",
+      "role": "68k CPU",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "m68020",
+      "name": "Motorola MC68020",
+      "family": "CPU",
+      "role": "32-bit 68k CPU",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "m68030",
+      "name": "Motorola MC68030",
+      "family": "CPU",
+      "role": "MMU 68k CPU",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "m68040",
+      "name": "Motorola MC68040",
+      "family": "CPU",
+      "role": "68k CPU with FPU",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "m68060",
+      "name": "Motorola MC68060",
+      "family": "CPU",
+      "role": "68k CPU",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "i8086",
+      "name": "Intel 8086",
+      "family": "CPU",
+      "role": "16-bit x86 CPU",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "i8088",
+      "name": "Intel 8088",
+      "family": "CPU",
+      "role": "8-bit external x86 CPU",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "i80286",
+      "name": "Intel 80286",
+      "family": "CPU",
+      "role": "Protected-mode x86 CPU",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "z80",
+      "name": "Zilog Z80",
+      "family": "CPU",
+      "role": "8-bit CPU",
+      "implementation": "stub",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "mos6502",
+      "name": "MOS 6502",
+      "family": "CPU",
+      "role": "8-bit CPU",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "mos6510",
+      "name": "MOS 6510",
+      "family": "CPU",
+      "role": "C64 CPU",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "w65c02",
+      "name": "WDC 65C02",
+      "family": "CPU",
+      "role": "CMOS 6502",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "sid6581",
+      "name": "MOS SID 6581",
+      "family": "Audio",
+      "role": "C64 sound chip",
+      "implementation": "stub",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "sid8580",
+      "name": "MOS SID 8580",
+      "family": "Audio",
+      "role": "C64 sound chip",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "paula",
+      "name": "Amiga Paula",
+      "family": "Audio",
+      "role": "Audio, disk and I/O DMA",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "agnus",
+      "name": "Amiga Agnus",
+      "family": "Video/DMA",
+      "role": "DMA, blitter and chip RAM control",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "denise",
+      "name": "Amiga Denise",
+      "family": "Video",
+      "role": "Display pipeline",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "alice",
+      "name": "Amiga Alice",
+      "family": "Video/DMA",
+      "role": "AGA DMA controller",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "lisa",
+      "name": "Amiga Lisa",
+      "family": "Video",
+      "role": "AGA display chip",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "gary",
+      "name": "Amiga Gary",
+      "family": "System",
+      "role": "Bus control and decoding",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "cia8520a",
+      "name": "MOS 8520 CIA A",
+      "family": "I/O",
+      "role": "Amiga timers, ports, interrupts",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "cia8520b",
+      "name": "MOS 8520 CIA B",
+      "family": "I/O",
+      "role": "Amiga timers, ports, interrupts",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "vicii",
+      "name": "MOS VIC-II",
+      "family": "Video",
+      "role": "C64 video controller",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "cia6526a",
+      "name": "MOS 6526 CIA A",
+      "family": "I/O",
+      "role": "C64 I/O and timers",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "cia6526b",
+      "name": "MOS 6526 CIA B",
+      "family": "I/O",
+      "role": "C64 I/O and timers",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "ym2149",
+      "name": "Yamaha YM2149",
+      "family": "Audio",
+      "role": "Atari ST PSG",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "ay38910",
+      "name": "GI AY-3-8910",
+      "family": "Audio",
+      "role": "Programmable sound generator",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "shifter",
+      "name": "Atari ST Shifter",
+      "family": "Video",
+      "role": "Display controller",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "glue",
+      "name": "Atari ST GLUE",
+      "family": "System",
+      "role": "Timing and bus control",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "mmu_st",
+      "name": "Atari ST MMU",
+      "family": "Memory",
+      "role": "ST memory controller",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "wd1772",
+      "name": "WD1772",
+      "family": "Storage",
+      "role": "Floppy controller",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "mfp68901",
+      "name": "Motorola MC68901",
+      "family": "I/O",
+      "role": "Multi-function peripheral",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "acia6850",
+      "name": "Motorola MC6850",
+      "family": "I/O",
+      "role": "Serial interface",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "ram",
+      "name": "Virtual RAM",
+      "family": "Memory",
+      "role": "Byte-addressable RAM",
+      "implementation": "emulated",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "rom",
+      "name": "Virtual ROM",
+      "family": "Memory",
+      "role": "Read-only memory",
+      "implementation": "emulated",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "usp",
+      "name": "USP Matrix",
+      "family": "Infrastructure",
+      "role": "Virtual bus and memory windows",
+      "implementation": "emulated",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "task_queue",
+      "name": "Task Queue",
+      "family": "Infrastructure",
+      "role": "Lock-protected task claims",
+      "implementation": "emulated",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "fpga_bridge",
+      "name": "FPGA Bus Bridge",
+      "family": "Hardware",
+      "role": "Future physical bridge",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "recovery_flux",
+      "name": "Flux Capture",
+      "family": "Recovery",
+      "role": "Read-data timestamp capture",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "recovery_analog",
+      "name": "Analog Capture AFE",
+      "family": "Recovery",
+      "role": "Raw head analog acquisition",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "ethernet_bridge",
+      "name": "Ethernet Bridge",
+      "family": "Hardware",
+      "role": "Future hardware transport",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "usb_bridge",
+      "name": "USB Bridge",
+      "family": "Hardware",
+      "role": "Future hardware transport",
+      "implementation": "not_implemented",
+      "hardware": "not_probed"
+    },
+    {
+      "id": "usm6502",
+      "name": "USM-6502 SBC",
+      "family": "Machine",
+      "role": "Virtueller 6502-Einplatinencomputer",
+      "implementation": "emulated",
+      "hardware": "not_present"
+    },
+    {
+      "id": "uart6502",
+      "name": "USM-6502 UART",
+      "family": "I/O",
+      "role": "Virtuelle serielle Ein-/Ausgabe",
+      "implementation": "emulated",
+      "hardware": "not_present"
+    },
+    {
+      "id": "timer6502",
+      "name": "USM-6502 Timer",
+      "family": "I/O",
+      "role": "Virtueller Timer",
+      "implementation": "emulated",
+      "hardware": "not_present"
+    },
+    {
+      "id": "gpio6502",
+      "name": "USM-6502 GPIO",
+      "family": "I/O",
+      "role": "Virtuelle GPIO",
+      "implementation": "emulated",
+      "hardware": "not_present"
+    }
+  ]
+}
