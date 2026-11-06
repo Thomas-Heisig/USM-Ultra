@@ -1,0 +1,24 @@
+name: Hardware adapter request
+description: Request a future physical chip or FPGA adapter
+title: "[Hardware] "
+labels: ["hardware"]
+body:
+  - type: input
+    id: chip
+    attributes:
+      label: Chip, package and revision
+      placeholder: MC68000 DIP-64
+    validations:
+      required: true
+  - type: textarea
+    id: electrical
+    attributes:
+      label: Voltage domains, timing class, datasheet and safety constraints
+    validations:
+      required: true
+  - type: textarea
+    id: fallback
+    attributes:
+      label: Virtual fallback behavior
+    validations:
+      required: true
