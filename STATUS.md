@@ -55,3 +55,7 @@ Eleven module pages are connected to the existing FastAPI backend: dashboard, ma
 ## Persistent machine workspace milestone
 
 Added local isolated machine directories, 6502 software upload, CPU/RAM/UART snapshot save and restore, browser controls and tests. Full monitor, program loader, peripherals, and hardware-state restoration remain incomplete. New CI tests are not yet confirmed passing.
+
+## MOS 6502 reference catalog
+
+Added historical CPU documentation, source catalog (py65, Arlet, MiSTer, cc65, Visual6502), planned complete-system profiles and read-only API. External cores and historical ROM images have not been integrated; no CI validation claimed.
