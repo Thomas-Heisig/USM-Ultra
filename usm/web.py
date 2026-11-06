@@ -76,6 +76,7 @@ def capabilities():
 @app.get("/api/docs-index")
 def docs_index():
     return [
+        {"title":"MOS 6502: Referenzen, Systeme und ROMs","path":"docs/MOS_6502_REFERENCE.md","url":"https://github.com/Thomas-Heisig/USM-Ultra/blob/main/docs/MOS_6502_REFERENCE.md"},
         {"title":"6502 Monitor und Image Loader","path":"docs/MONITOR_6502.md","url":"https://github.com/Thomas-Heisig/USM-Ultra/blob/main/docs/MONITOR_6502.md"},
         {"title":"6502 Peripherie","path":"docs/PERIPHERALS_6502.md","url":"https://github.com/Thomas-Heisig/USM-Ultra/blob/main/docs/PERIPHERALS_6502.md"},
         {"title":"Projektstatus","path":"STATUS.md","url":"https://github.com/Thomas-Heisig/USM-Ultra/blob/main/STATUS.md"},
