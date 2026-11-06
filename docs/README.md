@@ -41,3 +41,9 @@ Bei Änderungen an Registeradressen, Busverhalten, Timing-Klassen oder Pinbelegu
 - [Einstellungen, Persistenz und REST-API](SETTINGS.md)
 - [MasterVisor Web API](../usm/web.py)
 - [API-Einstellungen und Integrationstests](../tests/test_settings_api.py)
+
+## Erste vollständige Zielmaschine in Entwicklung
+
+- [USM-6502: virtueller Einplatinencomputer](USM_6502.md)
+- [6502-Maschinenprofil und ROM](../usm/machines/sbc6502.py)
+- [6502-Tests](../tests/test_sbc6502.py)
