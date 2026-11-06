@@ -10,7 +10,7 @@ import re
 from dataclasses import dataclass, field
 
 _BINOPS = {ast.Add:operator.add, ast.Sub:operator.sub, ast.Mult:operator.mul,
-           ast.FloorDiv:operator.floordiv, ast.Mod:operator.mod}
+           ast.FloorDiv:operator.floordiv, ast.Div:operator.floordiv, ast.Mod:operator.mod}
 _CMPS = {ast.Eq:operator.eq, ast.NotEq:operator.ne, ast.Lt:operator.lt,
          ast.LtE:operator.le, ast.Gt:operator.gt, ast.GtE:operator.ge}
 
@@ -35,7 +35,7 @@ class BasicConsole:
                 return -v if isinstance(n.op,ast.USub) else v
             if isinstance(n,ast.BinOp) and type(n.op) in _BINOPS:
                 a,b=walk(n.left,depth+1),walk(n.right,depth+1)
-                if b==0 and isinstance(n.op,(ast.FloorDiv,ast.Mod)):
+                if b==0 and isinstance(n.op,(ast.FloorDiv,ast.Div,ast.Mod)):
                     raise ValueError("division by zero")
                 return _BINOPS[type(n.op)](a,b)
             if isinstance(n,ast.Compare) and len(n.ops)==1 and type(n.ops[0]) in _CMPS:
