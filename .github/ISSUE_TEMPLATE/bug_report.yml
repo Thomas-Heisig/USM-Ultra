@@ -1,0 +1,27 @@
+name: Fehlerbericht
+description: Reproduzierbaren Defekt melden
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: expected
+    attributes:
+      label: Erwartetes Verhalten
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Beobachtetes Verhalten
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduktionsschritte
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version / Python / OS
