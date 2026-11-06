@@ -1,0 +1,16 @@
+__pycache__/
+.pytest_cache/
+.venv/
+*.pyc
+roms/
+rom_manifest*.json
+*.rom
+*.bin
+*.img
+*.adf
+*.st
+*.tos
+*.kick
+*.zip
+build/
+dist/
