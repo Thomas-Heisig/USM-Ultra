@@ -1,3 +1,26 @@
+# BASIC in USM-Ultra — implementation status
+
+**Now implemented:** an interactive, limited BASIC-like **Python host fallback** in MasterVisor. This is **not** the original 6502 Tiny BASIC or EhBASIC machine-code interpreter. It does not execute on the emulated 6502 CPU.
+
+Supported: numbered program lines, PRINT numeric expressions or quoted strings, LET/assignment, IF ... THEN line, GOTO, REM, END, STOP, RUN, LIST, NEW. Arithmetic: +, -, *, integer division //, modulo, comparisons. No INPUT, FOR/NEXT, GOSUB/RETURN, strings as variables, filesystem, native 6502 BASIC binary, or snapshots of BASIC state yet.
+
+Example:
+```basic
+10 PRINT 2+3
+RUN
+```
+Expected output: `5`.
+
+API: `GET /api/machines/usm-6502/basic`, `POST /api/machines/usm-6502/basic` with `{"text":"10 PRINT 2+3"}`. `engine` explicitly reports `host_python_fallback_not_native_6502`.
+
+**The real 6502 CPU path is separate:** `POST /api/machines/usm-6502/starter` runs a self-authored 6502 binary through py65, sending `USM 6502 READY` over the virtual serial device. This starter is not BASIC.
+
+**Next necessary engineering steps:** inspect and pin a permitted upstream Tiny BASIC/EhBASIC revision; integrate assembler/build; port character input/output to $8000/$8001; execute BASIC as 6502 machine code with tests; snapshot complete interpreter and peripheral state; support disk images and complete machine profiles. External code and proprietary ROMs are not automatically imported merely because publicly accessible.
+
+CI tests have been committed but not verified green in this session.
+
+---
+
 # First executable 6502 program and BASIC integration plan
 
 ## Available now
