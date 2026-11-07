@@ -7,6 +7,7 @@ from dataclasses import dataclass
 from . import __doc__ as _machine_doc
 from ..core import Matrix, Mapping, RAM, Transaction
 from .peripherals import SerialPort, Timer, GPIO
+from .acia6551 import ACIA6551
 
 RAM_START, RAM_SIZE = 0x0000, 0x8000
 UART_ADDR = 0x8000
@@ -94,6 +95,7 @@ class SBC6502:
         self.matrix = Matrix()
         self.ram = RAM(RAM_SIZE)
         self.uart = SerialPort()
+        self.acia = ACIA6551()
         self.timer = Timer()
         self.gpio = GPIO()
         self.rom = RAM(ROM_SIZE, readonly=True)
@@ -104,6 +106,7 @@ class SBC6502:
         self.matrix.map(Mapping(RAM_START, RAM_SIZE, self.ram, "6502 RAM"))
         self.matrix.map(Mapping(UART_ADDR, 2, self.uart, "Serial RX/TX"))
         self.matrix.map(Mapping(0x8010, 4, self.timer, "Timer"))
+        self.matrix.map(Mapping(0x8030, 4, self.acia, "Experimental 6551 ACIA"))
         self.matrix.map(Mapping(0x8020, 2, self.gpio, "GPIO"))
         self.matrix.map(Mapping(ROM_START, ROM_SIZE, self.rom, "6502 ROM", write=False))
         self.memory = BusMemory(self.matrix)
@@ -143,6 +146,7 @@ class SBC6502:
                 "timer": {"period": self.timer.period, "counter": self.timer.counter,
                           "enabled": self.timer.enabled, "pending": self.timer.pending},
                 "gpio": {"data": self.gpio.data, "direction": self.gpio.direction, "inputs": self.gpio.inputs},
+                "acia6551": {"rx_pending": len(self.acia.rx), "tx": self.acia.text(), "command": self.acia.command, "control": self.acia.control, "timing": "not_implemented"},
                 "hardware": "not_available"}
 
     def run(self, max_steps=10000):
@@ -170,6 +174,7 @@ class SBC6502:
                 {"start": "0x8000", "end": "0x8001", "name": "Serial RX/TX"},
                 {"start": "0x8010", "end": "0x8013", "name": "Timer"},
                 {"start": "0x8020", "end": "0x8021", "name": "GPIO"},
+                {"start": "0x8030", "end": "0x8033", "name": "Experimental 6551 ACIA"},
                 {"start": "0xE000", "end": "0xFFFF", "name": "ROM"},
             ],
         }
