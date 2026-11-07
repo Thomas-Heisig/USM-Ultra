@@ -328,6 +328,49 @@ def gpio_input_6502(request: GPIOInput):
         machine.gpio.inputs = request.value
         return machine.peripherals()["gpio"]
 
+
+@app.get("/api/catalog/machines")
+def catalog_machines(cpu: str | None = None, vendor: str | None = None, query: str | None = None):
+    from pathlib import Path
+    import json
+    path = Path(__file__).resolve().parents[1] / "docs" / "machines.json"
+    data = json.loads(path.read_text(encoding="utf-8"))["machines"]
+    if cpu:
+        data = [m for m in data if m["cpu"] == cpu]
+    if vendor:
+        data = [m for m in data if m["vendor"].lower() == vendor.lower()]
+    if query:
+        term = query.casefold()
+        data = [m for m in data if term in " ".join(str(m.get(k, "")) for k in ("name", "vendor", "cpu", "description", "firmware", "media")).casefold()]
+    return data
+
+@app.get("/api/catalog/documents")
+def catalog_documents(category: str | None = None, system: str | None = None, query: str | None = None):
+    from pathlib import Path
+    import json
+    path = Path(__file__).resolve().parents[1] / "docs" / "documents.json"
+    data = json.loads(path.read_text(encoding="utf-8"))["documents"]
+    if category:
+        data = [d for d in data if d["category"] == category]
+    if system:
+        data = [d for d in data if d["system"] == system]
+    if query:
+        term = query.casefold()
+        data = [d for d in data if term in " ".join(str(d.get(k, "")) for k in ("title", "description", "path", "category")).casefold()]
+    return data
+
+@app.get("/api/machines/usm-6502/session")
+def cpu6502_session():
+    with machine_lock:
+        return get_monitor().state()
+
+@app.post("/api/machines/usm-6502/session/pause")
+def cpu6502_pause():
+    # Monitor execution is bounded and synchronous; no background worker to interrupt.
+    with machine_lock:
+        state = get_monitor().state()
+        return {"mode": "bounded_synchronous", "paused": True, **state}
+
 @app.get("/api/machines")
 def machines():
     return [{"id":"usm-6502","name":"USM-6502 SBC","backend":"py65","hardware":"not_probed","status":"experimental","description":"32 KiB RAM, 8 KiB ROM, synthetic UART; software-only"}]
