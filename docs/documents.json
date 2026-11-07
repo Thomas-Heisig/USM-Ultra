@@ -1,0 +1,214 @@
+{
+  "schema": 1,
+  "documents": [
+    {
+      "id": "doc-001",
+      "title": "MOS 6502 – Architektur",
+      "category": "CPU",
+      "system": "6502",
+      "path": "docs/6502/README.md",
+      "description": "Register, Adressierung, Speicherplan und Quellen",
+      "url": "https://github.com/Thomas-Heisig/USM-Ultra/blob/main/docs/6502/README.md",
+      "format": "MD",
+      "status": "repository"
+    },
+    {
+      "id": "doc-002",
+      "title": "MOS 6502 – Mikroarchitektur",
+      "category": "CPU",
+      "system": "6502",
+      "path": "docs/6502/MICROARCHITECTURE.md",
+      "description": "PLA, Zustandssteuerung und interne Abläufe",
+      "url": "https://github.com/Thomas-Heisig/USM-Ultra/blob/main/docs/6502/MICROARCHITECTURE.md",
+      "format": "MD",
+      "status": "repository"
+    },
+    {
+      "id": "doc-003",
+      "title": "MOS 6502 – Schaltbilder",
+      "category": "Schaltbilder",
+      "system": "6502",
+      "path": "docs/6502/SCHEMATICS.md",
+      "description": "Logische System- und Datenpfaddiagramme",
+      "url": "https://github.com/Thomas-Heisig/USM-Ultra/blob/main/docs/6502/SCHEMATICS.md",
+      "format": "MD",
+      "status": "repository"
+    },
+    {
+      "id": "doc-004",
+      "title": "MOS 6502 – Referenz",
+      "category": "CPU",
+      "system": "6502",
+      "path": "docs/MOS_6502_REFERENCE.md",
+      "description": "Historische Quellen und Systembeispiele",
+      "url": "https://github.com/Thomas-Heisig/USM-Ultra/blob/main/docs/MOS_6502_REFERENCE.md",
+      "format": "MD",
+      "status": "repository"
+    },
+    {
+      "id": "doc-005",
+      "title": "MOS 6502 – Monitor",
+      "category": "Software",
+      "system": "6502",
+      "path": "docs/MONITOR_6502.md",
+      "description": "Debugger, Breakpoints und Image-Loader",
+      "url": "https://github.com/Thomas-Heisig/USM-Ultra/blob/main/docs/MONITOR_6502.md",
+      "format": "MD",
+      "status": "repository"
+    },
+    {
+      "id": "doc-006",
+      "title": "MOS 6502 – Peripherie",
+      "category": "Hardware",
+      "system": "6502",
+      "path": "docs/PERIPHERALS_6502.md",
+      "description": "UART, Timer, GPIO und Register",
+      "url": "https://github.com/Thomas-Heisig/USM-Ultra/blob/main/docs/PERIPHERALS_6502.md",
+      "format": "MD",
+      "status": "repository"
+    },
+    {
+      "id": "doc-007",
+      "title": "Microsoft BASIC-M6502",
+      "category": "Software",
+      "system": "6502",
+      "path": "third_party/microsoft-basic-m6502/README.md",
+      "description": "MIT-lizenzierter historischer Quelltext und Portierungsstand",
+      "url": "https://github.com/Thomas-Heisig/USM-Ultra/blob/main/third_party/microsoft-basic-m6502/README.md",
+      "format": "MD",
+      "status": "repository"
+    },
+    {
+      "id": "doc-008",
+      "title": "USM-6502 Firmware",
+      "category": "Software",
+      "system": "6502",
+      "path": "firmware/6502/README.md",
+      "description": "Boot-ROM, Build und Vektoren",
+      "url": "https://github.com/Thomas-Heisig/USM-Ultra/blob/main/firmware/6502/README.md",
+      "format": "MD",
+      "status": "repository"
+    },
+    {
+      "id": "doc-009",
+      "title": "MasterVisor Architektur",
+      "category": "Architektur",
+      "system": "System",
+      "path": "docs/MASTER_VISOR_ARCHITECTURE.md",
+      "description": "Kataloge, Matrix, Backend und Grenzen",
+      "url": "https://github.com/Thomas-Heisig/USM-Ultra/blob/main/docs/MASTER_VISOR_ARCHITECTURE.md",
+      "format": "MD",
+      "status": "repository"
+    },
+    {
+      "id": "doc-010",
+      "title": "Chipkatalog",
+      "category": "Katalog",
+      "system": "System",
+      "path": "docs/CHIP_CATALOG.md",
+      "description": "Prozessoren und Peripherie",
+      "url": "https://github.com/Thomas-Heisig/USM-Ultra/blob/main/docs/CHIP_CATALOG.md",
+      "format": "MD",
+      "status": "repository"
+    },
+    {
+      "id": "doc-011",
+      "title": "ROM- und Medienrichtlinie",
+      "category": "Medien",
+      "system": "System",
+      "path": "docs/ROM_POLICY.md",
+      "description": "Rechte und Umgang mit Firmware",
+      "url": "https://github.com/Thomas-Heisig/USM-Ultra/blob/main/docs/ROM_POLICY.md",
+      "format": "MD",
+      "status": "repository"
+    },
+    {
+      "id": "doc-012",
+      "title": "Virtual-First",
+      "category": "Architektur",
+      "system": "System",
+      "path": "docs/VIRTUAL_FIRST.md",
+      "description": "Virtuelle und physische Komponenten",
+      "url": "https://github.com/Thomas-Heisig/USM-Ultra/blob/main/docs/VIRTUAL_FIRST.md",
+      "format": "MD",
+      "status": "repository"
+    },
+    {
+      "id": "doc-013",
+      "title": "Timing und Betriebsmodi",
+      "category": "Architektur",
+      "system": "System",
+      "path": "docs/MODES_AND_TIMING.md",
+      "description": "Zeitklassen und Ausführungsmodi",
+      "url": "https://github.com/Thomas-Heisig/USM-Ultra/blob/main/docs/MODES_AND_TIMING.md",
+      "format": "MD",
+      "status": "repository"
+    },
+    {
+      "id": "doc-014",
+      "title": "Einstellungen",
+      "category": "Betrieb",
+      "system": "System",
+      "path": "docs/SETTINGS.md",
+      "description": "Konfiguration",
+      "url": "https://github.com/Thomas-Heisig/USM-Ultra/blob/main/docs/SETTINGS.md",
+      "format": "MD",
+      "status": "repository"
+    },
+    {
+      "id": "doc-015",
+      "title": "Status",
+      "category": "Betrieb",
+      "system": "System",
+      "path": "STATUS.md",
+      "description": "Implementierungsstand",
+      "url": "https://github.com/Thomas-Heisig/USM-Ultra/blob/main/STATUS.md",
+      "format": "MD",
+      "status": "repository"
+    },
+    {
+      "id": "doc-016",
+      "title": "V7-Studie",
+      "category": "Forschung",
+      "system": "System",
+      "path": "docs/STUDIE_V7.md",
+      "description": "Studienübersicht",
+      "url": "https://github.com/Thomas-Heisig/USM-Ultra/blob/main/docs/STUDIE_V7.md",
+      "format": "MD",
+      "status": "repository"
+    },
+    {
+      "id": "doc-017",
+      "title": "Microsoft BASIC – Originalquelle",
+      "category": "Quellcode",
+      "system": "6502",
+      "path": "third_party/microsoft-basic-m6502/m6502.asm",
+      "description": "Historischer BASIC-Assemblerquelltext",
+      "url": "https://github.com/Thomas-Heisig/USM-Ultra/blob/main/third_party/microsoft-basic-m6502/m6502.asm",
+      "format": "ASM",
+      "status": "repository"
+    },
+    {
+      "id": "doc-018",
+      "title": "USM Boot-ROM – Assembler",
+      "category": "Quellcode",
+      "system": "6502",
+      "path": "firmware/6502/boot.asm",
+      "description": "Originales USM-Startprogramm",
+      "url": "https://github.com/Thomas-Heisig/USM-Ultra/blob/main/firmware/6502/boot.asm",
+      "format": "ASM",
+      "status": "repository"
+    },
+    {
+      "id": "doc-019",
+      "title": "USM Boot-ROM – Builder",
+      "category": "Quellcode",
+      "system": "6502",
+      "path": "firmware/6502/build_boot.py",
+      "description": "Reproduzierbare ROM-Erzeugung",
+      "url": "https://github.com/Thomas-Heisig/USM-Ultra/blob/main/firmware/6502/build_boot.py",
+      "format": "PY",
+      "status": "repository"
+    }
+  ]
+}
