@@ -10,6 +10,7 @@
 - [Visual6502/visual6502](https://github.com/trebonian/visual6502) — Referenz für Transistornetzliste und interne Signale; keine eingebaute Laufzeitabhängigkeit.
 - [py65](https://github.com/mnaberez/py65) — **als optionale Dependency integriert**, CPU-Interpreter.
 - [cc65](https://github.com/cc65/cc65) — Assembler/Compiler/Linker; **nicht als Dependency oder Build-Werkzeug integriert**.
+- [Microsoft BASIC-M6502](https://github.com/microsoft/BASIC-M6502) — historischer BASIC-1.1-Quelltext **mit MIT-Lizenz im Ordner `third_party/microsoft-basic-m6502/` übernommen**; noch nicht für USM assembliert oder ausgeführt.
 - [Arlet 6502](https://github.com/anders-code/arlet-6502) — Verilog-FPGA-Core; **nicht integriert**.
 - [MiSTer Apple II](https://github.com/MiSTer-devel/Apple-II_MiSTer), [MiSTer C64](https://github.com/MiSTer-devel/C64_MiSTer) — Systemreferenzen, **nicht integriert**.
 
@@ -42,7 +43,9 @@ Der 6502 besitzt **kein frei programmierbares Mikrocode-ROM** wie manche anderen
 | $8000–$8001 | 2 Byte | USM SerialPort (kein 6551-ACIA) |
 | $8010–$8013 | 4 Byte | USM Timer |
 | $8020–$8021 | 2 Byte | USM GPIO |
-| $8022–$DFFF | — | Nicht zugeordnet |
+| $8022–$802F | — | Nicht zugeordnet |
+| $8030–$8033 | 4 Byte | Experimenteller 6551-ACIA-Registeradapter (ohne Timing/IRQ) |
+| $8034–$DFFF | — | Nicht zugeordnet |
 | $E000–$FFFF | 8 KiB | Schreibgeschütztes Monitor-ROM |
 
 Der **Matrix-Konfigurator im Browser ist ein Entwurfswerkzeug**. Er ersetzt nicht die oben implementierte Zuordnung. Konfigurationen werden noch nicht in eine neue lauffähige SBC-Instanz kompiliert.
@@ -59,4 +62,4 @@ Der **Matrix-Konfigurator im Browser ist ein Entwurfswerkzeug**. Er ersetzt nich
 
 ## Noch offen
 
-Native 6502-BASIC-Firmware, vollständig emulierte historische Chips (VIC-II, SID, 6522/6551 usw.), DMA, exakte Interrupt- und Taktverdrahtung, vollständige Opcode-/Zyklustests, originale Board-Layouts und reale FPGA-Anbindung. Nicht als abgeschlossen ausweisen, solange keine automatisierten Integrations- und Lizenztests vorliegen.
+Microsoft-BASIC-Quellportierung und ROM-Build, vollständig emulierte historische Chips (VIC-II, SID, 6522/6551 usw.), DMA, exakte Interrupt- und Taktverdrahtung, vollständige Opcode-/Zyklustests, originale Board-Layouts und reale FPGA-Anbindung. Nicht als abgeschlossen ausweisen, solange keine automatisierten Integrations- und Lizenztests vorliegen.
