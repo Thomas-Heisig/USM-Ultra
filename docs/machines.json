@@ -1,0 +1,797 @@
+{
+  "schema": 1,
+  "notice": "Historische Maschinenprofile; nur USM-6502 ist lokal teilweise ausführbar. Keine proprietären ROMs oder Diskimages enthalten.",
+  "machines": [
+    {
+      "id": "usm6502",
+      "name": "USM-6502 SBC",
+      "vendor": "USM",
+      "cpu": "mos6502",
+      "chips": [
+        "uart6502",
+        "timer6502",
+        "gpio6502",
+        "ram",
+        "rom"
+      ],
+      "ram": "32 KiB",
+      "firmware": "USM Boot-ROM",
+      "media": [
+        "BIN"
+      ],
+      "status": "Teilweise ausführbar",
+      "description": "Eigener 6502-Einplatinencomputer mit Monitor-ROM und virtuellen I/O-Registern.",
+      "image": null,
+      "documents": [],
+      "availability": {
+        "firmware": "not_bundled",
+        "media": "not_bundled",
+        "images": "not_bundled"
+      }
+    },
+    {
+      "id": "apple1",
+      "name": "Apple I",
+      "vendor": "Apple",
+      "cpu": "mos6502",
+      "chips": [
+        "ram",
+        "rom"
+      ],
+      "ram": "4–48 KiB",
+      "firmware": "Apple I Monitor",
+      "media": [
+        "BIN"
+      ],
+      "status": "Geplant",
+      "description": "1976: 6502-Einplatinencomputer; PIA- und Terminalemulation fehlen.",
+      "image": null,
+      "documents": [],
+      "availability": {
+        "firmware": "not_bundled",
+        "media": "not_bundled",
+        "images": "not_bundled"
+      }
+    },
+    {
+      "id": "apple2",
+      "name": "Apple II",
+      "vendor": "Apple",
+      "cpu": "mos6502",
+      "chips": [
+        "ram",
+        "rom"
+      ],
+      "ram": "4–48 KiB",
+      "firmware": "Apple II Monitor/Integer BASIC",
+      "media": [
+        "DSK",
+        "NIB"
+      ],
+      "status": "Geplant",
+      "description": "1977: Apple-II-Grafik, Slotbus und Disk-II-Controller erforderlich.",
+      "image": null,
+      "documents": [],
+      "availability": {
+        "firmware": "not_bundled",
+        "media": "not_bundled",
+        "images": "not_bundled"
+      }
+    },
+    {
+      "id": "apple2e",
+      "name": "Apple IIe",
+      "vendor": "Apple",
+      "cpu": "mos6502",
+      "chips": [
+        "ram",
+        "rom"
+      ],
+      "ram": "64 KiB+",
+      "firmware": "Apple IIe ROM",
+      "media": [
+        "DSK",
+        "NIB",
+        "WOZ"
+      ],
+      "status": "Geplant",
+      "description": "Apple-IIe-Variante mit erweitertem Speicher und Slotkarten.",
+      "image": null,
+      "documents": [],
+      "availability": {
+        "firmware": "not_bundled",
+        "media": "not_bundled",
+        "images": "not_bundled"
+      }
+    },
+    {
+      "id": "pet",
+      "name": "Commodore PET",
+      "vendor": "Commodore",
+      "cpu": "mos6502",
+      "chips": [
+        "ram",
+        "rom"
+      ],
+      "ram": "4–32 KiB",
+      "firmware": "PET BASIC/KERNAL",
+      "media": [
+        "D64",
+        "PRG"
+      ],
+      "status": "Geplant",
+      "description": "PET: 6502, BASIC/KERNAL und 6522/6520-Peripherie.",
+      "image": null,
+      "documents": [],
+      "availability": {
+        "firmware": "not_bundled",
+        "media": "not_bundled",
+        "images": "not_bundled"
+      }
+    },
+    {
+      "id": "vic20",
+      "name": "Commodore VIC-20",
+      "vendor": "Commodore",
+      "cpu": "mos6502",
+      "chips": [
+        "ram",
+        "rom"
+      ],
+      "ram": "5 KiB+",
+      "firmware": "VIC-20 BASIC/KERNAL",
+      "media": [
+        "PRG",
+        "D64",
+        "TAP"
+      ],
+      "status": "Geplant",
+      "description": "VIC-20 mit VIC-I, 6522 VIA und Speichererweiterungen.",
+      "image": null,
+      "documents": [],
+      "availability": {
+        "firmware": "not_bundled",
+        "media": "not_bundled",
+        "images": "not_bundled"
+      }
+    },
+    {
+      "id": "c64",
+      "name": "Commodore 64",
+      "vendor": "Commodore",
+      "cpu": "mos6510",
+      "chips": [
+        "vicii",
+        "sid6581",
+        "cia6526a",
+        "cia6526b",
+        "ram",
+        "rom"
+      ],
+      "ram": "64 KiB",
+      "firmware": "BASIC/KERNAL/Character ROM",
+      "media": [
+        "D64",
+        "TAP",
+        "CRT",
+        "PRG"
+      ],
+      "status": "Geplant",
+      "description": "MOS 6510, VIC-II, SID und zwei CIAs; keine vollständige C64-Emulation vorhanden.",
+      "image": null,
+      "documents": [],
+      "availability": {
+        "firmware": "not_bundled",
+        "media": "not_bundled",
+        "images": "not_bundled"
+      }
+    },
+    {
+      "id": "c128",
+      "name": "Commodore 128",
+      "vendor": "Commodore",
+      "cpu": "mos6510",
+      "chips": [
+        "vicii",
+        "sid6581",
+        "ram",
+        "rom"
+      ],
+      "ram": "128 KiB",
+      "firmware": "C128 ROMs",
+      "media": [
+        "D64",
+        "D71",
+        "D81"
+      ],
+      "status": "Geplant",
+      "description": "C128 verwendet tatsächlich 8502 und Z80; 6510 hier nur Familienplatzhalter, kein korrektes CPU-Profil.",
+      "image": null,
+      "documents": [],
+      "availability": {
+        "firmware": "not_bundled",
+        "media": "not_bundled",
+        "images": "not_bundled"
+      }
+    },
+    {
+      "id": "atari800",
+      "name": "Atari 800",
+      "vendor": "Atari",
+      "cpu": "mos6502",
+      "chips": [
+        "ram",
+        "rom"
+      ],
+      "ram": "8–48 KiB",
+      "firmware": "Atari OS ROM",
+      "media": [
+        "ATR",
+        "XFD"
+      ],
+      "status": "Geplant",
+      "description": "6502, ANTIC, GTIA, POKEY und SIO müssen ergänzt werden.",
+      "image": null,
+      "documents": [],
+      "availability": {
+        "firmware": "not_bundled",
+        "media": "not_bundled",
+        "images": "not_bundled"
+      }
+    },
+    {
+      "id": "atari2600",
+      "name": "Atari 2600",
+      "vendor": "Atari",
+      "cpu": "mos6502",
+      "chips": [
+        "ram",
+        "rom"
+      ],
+      "ram": "128 Byte",
+      "firmware": "Cartridge ROM",
+      "media": [
+        "BIN",
+        "A26"
+      ],
+      "status": "Geplant",
+      "description": "Verwendet 6507-Variante, TIA und RIOT; CPU-Familie nur Annäherung.",
+      "image": null,
+      "documents": [],
+      "availability": {
+        "firmware": "not_bundled",
+        "media": "not_bundled",
+        "images": "not_bundled"
+      }
+    },
+    {
+      "id": "nes",
+      "name": "Nintendo NES",
+      "vendor": "Nintendo",
+      "cpu": "mos6502",
+      "chips": [
+        "ram",
+        "rom"
+      ],
+      "ram": "2 KiB",
+      "firmware": "Cartridge ROM",
+      "media": [
+        "NES"
+      ],
+      "status": "Geplant",
+      "description": "Ricoh 2A03/2A07 CPU-Variante, PPU, APU und Mapper fehlen.",
+      "image": null,
+      "documents": [],
+      "availability": {
+        "firmware": "not_bundled",
+        "media": "not_bundled",
+        "images": "not_bundled"
+      }
+    },
+    {
+      "id": "bbc",
+      "name": "BBC Micro Model B",
+      "vendor": "Acorn",
+      "cpu": "mos6502",
+      "chips": [
+        "ram",
+        "rom"
+      ],
+      "ram": "32 KiB",
+      "firmware": "MOS/OS ROM, BBC BASIC",
+      "media": [
+        "SSD",
+        "DSD"
+      ],
+      "status": "Geplant",
+      "description": "6502, 6845-Video, 6522 VIA und Diskettencontroller.",
+      "image": null,
+      "documents": [],
+      "availability": {
+        "firmware": "not_bundled",
+        "media": "not_bundled",
+        "images": "not_bundled"
+      }
+    },
+    {
+      "id": "electron",
+      "name": "Acorn Electron",
+      "vendor": "Acorn",
+      "cpu": "mos6502",
+      "chips": [
+        "ram",
+        "rom"
+      ],
+      "ram": "32 KiB",
+      "firmware": "Electron OS/BASIC",
+      "media": [
+        "UEF",
+        "SSD"
+      ],
+      "status": "Geplant",
+      "description": "6502 und ULA-basierte Video-/I/O-Funktionen.",
+      "image": null,
+      "documents": [],
+      "availability": {
+        "firmware": "not_bundled",
+        "media": "not_bundled",
+        "images": "not_bundled"
+      }
+    },
+    {
+      "id": "amiga500",
+      "name": "Amiga 500",
+      "vendor": "Commodore",
+      "cpu": "m68000",
+      "chips": [
+        "agnus",
+        "denise",
+        "paula",
+        "gary",
+        "cia8520a",
+        "cia8520b",
+        "ram",
+        "rom"
+      ],
+      "ram": "512 KiB",
+      "firmware": "Kickstart 1.x/2.x",
+      "media": [
+        "ADF",
+        "HDF"
+      ],
+      "status": "Geplant",
+      "description": "OCS/ECS 68k-System, Custom-Chips und Kickstart erforderlich.",
+      "image": null,
+      "documents": [],
+      "availability": {
+        "firmware": "not_bundled",
+        "media": "not_bundled",
+        "images": "not_bundled"
+      }
+    },
+    {
+      "id": "amiga600",
+      "name": "Amiga 600",
+      "vendor": "Commodore",
+      "cpu": "m68000",
+      "chips": [
+        "agnus",
+        "denise",
+        "paula",
+        "gary",
+        "cia8520a",
+        "cia8520b",
+        "ram",
+        "rom"
+      ],
+      "ram": "1 MiB",
+      "firmware": "Kickstart 2.x/3.x",
+      "media": [
+        "ADF",
+        "HDF"
+      ],
+      "status": "Geplant",
+      "description": "ECS-Amiga mit IDE, PCMCIA und Kickstart.",
+      "image": null,
+      "documents": [],
+      "availability": {
+        "firmware": "not_bundled",
+        "media": "not_bundled",
+        "images": "not_bundled"
+      }
+    },
+    {
+      "id": "amiga1200",
+      "name": "Amiga 1200",
+      "vendor": "Commodore",
+      "cpu": "m68020",
+      "chips": [
+        "alice",
+        "lisa",
+        "paula",
+        "gary",
+        "cia8520a",
+        "cia8520b",
+        "ram",
+        "rom"
+      ],
+      "ram": "2 MiB",
+      "firmware": "Kickstart 3.x",
+      "media": [
+        "ADF",
+        "HDF"
+      ],
+      "status": "Geplant",
+      "description": "AGA-Chipsatz, 68EC020, IDE und Kickstart.",
+      "image": null,
+      "documents": [],
+      "availability": {
+        "firmware": "not_bundled",
+        "media": "not_bundled",
+        "images": "not_bundled"
+      }
+    },
+    {
+      "id": "amiga2000",
+      "name": "Amiga 2000",
+      "vendor": "Commodore",
+      "cpu": "m68000",
+      "chips": [
+        "agnus",
+        "denise",
+        "paula",
+        "gary",
+        "cia8520a",
+        "cia8520b",
+        "ram",
+        "rom"
+      ],
+      "ram": "1 MiB",
+      "firmware": "Kickstart 1.x–3.x",
+      "media": [
+        "ADF",
+        "HDF"
+      ],
+      "status": "Geplant",
+      "description": "Amiga mit Zorro-Erweiterungsbus und OCS/ECS.",
+      "image": null,
+      "documents": [],
+      "availability": {
+        "firmware": "not_bundled",
+        "media": "not_bundled",
+        "images": "not_bundled"
+      }
+    },
+    {
+      "id": "atarist",
+      "name": "Atari 520ST/1040ST",
+      "vendor": "Atari",
+      "cpu": "m68000",
+      "chips": [
+        "shifter",
+        "glue",
+        "mmu_st",
+        "ym2149",
+        "mfp68901",
+        "acia6850",
+        "wd1772",
+        "ram",
+        "rom"
+      ],
+      "ram": "512 KiB–1 MiB",
+      "firmware": "TOS ROM",
+      "media": [
+        "ST",
+        "MSA",
+        "STX"
+      ],
+      "status": "Geplant",
+      "description": "68000, GLUE, Shifter, MMU, YM2149, WD1772 und TOS.",
+      "image": null,
+      "documents": [],
+      "availability": {
+        "firmware": "not_bundled",
+        "media": "not_bundled",
+        "images": "not_bundled"
+      }
+    },
+    {
+      "id": "atariste",
+      "name": "Atari STE",
+      "vendor": "Atari",
+      "cpu": "m68000",
+      "chips": [
+        "shifter",
+        "glue",
+        "mmu_st",
+        "ym2149",
+        "mfp68901",
+        "acia6850",
+        "wd1772",
+        "ram",
+        "rom"
+      ],
+      "ram": "1–4 MiB",
+      "firmware": "TOS 1.6x/2.x",
+      "media": [
+        "ST",
+        "MSA",
+        "STX"
+      ],
+      "status": "Geplant",
+      "description": "STE: erweiterte Grafikpalette, DMA-Sound, Blitter und Joysticks.",
+      "image": null,
+      "documents": [],
+      "availability": {
+        "firmware": "not_bundled",
+        "media": "not_bundled",
+        "images": "not_bundled"
+      }
+    },
+    {
+      "id": "ataritt",
+      "name": "Atari TT030",
+      "vendor": "Atari",
+      "cpu": "m68030",
+      "chips": [
+        "ram",
+        "rom",
+        "ym2149"
+      ],
+      "ram": "2 MiB+",
+      "firmware": "TOS 3.x",
+      "media": [
+        "ST",
+        "MSA",
+        "HDF"
+      ],
+      "status": "Geplant",
+      "description": "68030-Workstation; TT-Chipsatz noch nicht im USM-Katalog.",
+      "image": null,
+      "documents": [],
+      "availability": {
+        "firmware": "not_bundled",
+        "media": "not_bundled",
+        "images": "not_bundled"
+      }
+    },
+    {
+      "id": "atarifalcon",
+      "name": "Atari Falcon030",
+      "vendor": "Atari",
+      "cpu": "m68030",
+      "chips": [
+        "ram",
+        "rom",
+        "ym2149"
+      ],
+      "ram": "1–14 MiB",
+      "firmware": "TOS 4.x",
+      "media": [
+        "ST",
+        "MSA",
+        "HDF"
+      ],
+      "status": "Geplant",
+      "description": "68030, VIDEL, DSP56001 und Audiohardware fehlen.",
+      "image": null,
+      "documents": [],
+      "availability": {
+        "firmware": "not_bundled",
+        "media": "not_bundled",
+        "images": "not_bundled"
+      }
+    },
+    {
+      "id": "sinclair48",
+      "name": "ZX Spectrum 48K",
+      "vendor": "Sinclair",
+      "cpu": "z80",
+      "chips": [
+        "ram",
+        "rom"
+      ],
+      "ram": "48 KiB",
+      "firmware": "Spectrum BASIC ROM",
+      "media": [
+        "TAP",
+        "TZX",
+        "Z80",
+        "SNA"
+      ],
+      "status": "Geplant",
+      "description": "Z80, ULA, Tastaturmatrix und Band-I/O.",
+      "image": null,
+      "documents": [],
+      "availability": {
+        "firmware": "not_bundled",
+        "media": "not_bundled",
+        "images": "not_bundled"
+      }
+    },
+    {
+      "id": "sinclair128",
+      "name": "ZX Spectrum 128K",
+      "vendor": "Sinclair",
+      "cpu": "z80",
+      "chips": [
+        "ay38910",
+        "ram",
+        "rom"
+      ],
+      "ram": "128 KiB",
+      "firmware": "Spectrum 128 ROM",
+      "media": [
+        "TAP",
+        "TZX",
+        "Z80"
+      ],
+      "status": "Geplant",
+      "description": "Bank-Switching, AY-3-8910 und ULA.",
+      "image": null,
+      "documents": [],
+      "availability": {
+        "firmware": "not_bundled",
+        "media": "not_bundled",
+        "images": "not_bundled"
+      }
+    },
+    {
+      "id": "cpc464",
+      "name": "Amstrad CPC 464",
+      "vendor": "Amstrad",
+      "cpu": "z80",
+      "chips": [
+        "ay38910",
+        "ram",
+        "rom"
+      ],
+      "ram": "64 KiB",
+      "firmware": "CPC BASIC/OS",
+      "media": [
+        "CDT",
+        "DSK",
+        "SNA"
+      ],
+      "status": "Geplant",
+      "description": "Z80, Gate Array, 6845 und PSG.",
+      "image": null,
+      "documents": [],
+      "availability": {
+        "firmware": "not_bundled",
+        "media": "not_bundled",
+        "images": "not_bundled"
+      }
+    },
+    {
+      "id": "cpc6128",
+      "name": "Amstrad CPC 6128",
+      "vendor": "Amstrad",
+      "cpu": "z80",
+      "chips": [
+        "ay38910",
+        "ram",
+        "rom"
+      ],
+      "ram": "128 KiB",
+      "firmware": "CPC BASIC/OS",
+      "media": [
+        "DSK",
+        "CDT"
+      ],
+      "status": "Geplant",
+      "description": "CPC mit 128-KiB-Banking und Diskettencontroller.",
+      "image": null,
+      "documents": [],
+      "availability": {
+        "firmware": "not_bundled",
+        "media": "not_bundled",
+        "images": "not_bundled"
+      }
+    },
+    {
+      "id": "msx1",
+      "name": "MSX 1",
+      "vendor": "MSX",
+      "cpu": "z80",
+      "chips": [
+        "ay38910",
+        "ram",
+        "rom"
+      ],
+      "ram": "8–64 KiB",
+      "firmware": "MSX BIOS/BASIC",
+      "media": [
+        "ROM",
+        "DSK",
+        "CAS"
+      ],
+      "status": "Geplant",
+      "description": "Z80, TMS9918-Videofamilie und PSG.",
+      "image": null,
+      "documents": [],
+      "availability": {
+        "firmware": "not_bundled",
+        "media": "not_bundled",
+        "images": "not_bundled"
+      }
+    },
+    {
+      "id": "ibmpc",
+      "name": "IBM PC 5150",
+      "vendor": "IBM",
+      "cpu": "i8088",
+      "chips": [
+        "ram",
+        "rom"
+      ],
+      "ram": "16–640 KiB",
+      "firmware": "IBM BIOS",
+      "media": [
+        "IMG",
+        "IMA"
+      ],
+      "status": "Geplant",
+      "description": "8088, 8259, 8253, 8237, CGA/MDA und PC-DOS-Komponenten fehlen.",
+      "image": null,
+      "documents": [],
+      "availability": {
+        "firmware": "not_bundled",
+        "media": "not_bundled",
+        "images": "not_bundled"
+      }
+    },
+    {
+      "id": "ibmxt",
+      "name": "IBM PC XT",
+      "vendor": "IBM",
+      "cpu": "i8088",
+      "chips": [
+        "ram",
+        "rom"
+      ],
+      "ram": "64–640 KiB",
+      "firmware": "XT BIOS",
+      "media": [
+        "IMG",
+        "IMA",
+        "VHD"
+      ],
+      "status": "Geplant",
+      "description": "8088, XT-Bus, Festplattencontroller und BIOS.",
+      "image": null,
+      "documents": [],
+      "availability": {
+        "firmware": "not_bundled",
+        "media": "not_bundled",
+        "images": "not_bundled"
+      }
+    },
+    {
+      "id": "ibmat",
+      "name": "IBM PC AT",
+      "vendor": "IBM",
+      "cpu": "i80286",
+      "chips": [
+        "ram",
+        "rom"
+      ],
+      "ram": "256 KiB+",
+      "firmware": "AT BIOS",
+      "media": [
+        "IMG",
+        "IMA",
+        "VHD"
+      ],
+      "status": "Geplant",
+      "description": "80286, AT-Controller und CMOS/RTC.",
+      "image": null,
+      "documents": [],
+      "availability": {
+        "firmware": "not_bundled",
+        "media": "not_bundled",
+        "images": "not_bundled"
+      }
+    }
+  ]
+}
