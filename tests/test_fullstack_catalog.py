@@ -1,4 +1,5 @@
 """Catalog endpoints and 6502 monitor integration smoke tests."""
+import pytest
 from fastapi.testclient import TestClient
 from usm.web import app
 
@@ -19,7 +20,6 @@ def test_document_library_filters():
     assert all(d["system"] == "6502" for d in response.json())
 
 def test_6502_monitor_session_and_reset():
-    import pytest
     pytest.importorskip("py65")
     response = client.post("/api/machines/usm-6502/monitor/reset")
     assert response.status_code == 200
@@ -33,3 +33,13 @@ def test_6502_monitor_session_and_reset():
     paused = client.post("/api/machines/usm-6502/session/pause")
     assert paused.status_code == 200
     assert paused.json()["paused"] is True
+    run = client.post("/api/machines/usm-6502/monitor/run", json={"count": 1})
+    assert run.status_code == 200
+    assert run.json()["steps"] == 1
+
+
+@pytest.mark.parametrize("route", ["monitor/run", "monitor/step", "step"])
+@pytest.mark.parametrize("count", [0, 100001])
+def test_6502_step_requests_reject_out_of_range_counts(route, count):
+    response = client.post(f"/api/machines/usm-6502/{route}", json={"count": count})
+    assert response.status_code == 422
