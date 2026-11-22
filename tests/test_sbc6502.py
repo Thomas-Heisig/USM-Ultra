@@ -37,3 +37,10 @@ def test_6502_boot_and_output():
     assert result.uart_text == "USM-6502 OK"
     assert result.pc == 0xE00F
     assert result.steps < 10000
+
+def test_6502_boot_uses_rom_reset_vector():
+    pytest.importorskip("py65")
+    image = bytearray(demo_rom())
+    image[0x1FFC:0x1FFE] = (0xE100).to_bytes(2, "little")
+    machine = SBC6502(image)
+    assert machine.boot() == 0xE100
