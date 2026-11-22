@@ -35,6 +35,9 @@ Der Monitor führt Befehle synchron und mit festem Instruktionslimit aus; er ist
 - `POST /api/machines/usm-6502/monitor/memory` — `{"address":512,"value":234}`
 - `POST /api/machines/usm-6502/images/load` — `{"name":"demo.prg","start":true}`
 
+`count` muss für `monitor/run` zwischen 1 und 100.000 und für `monitor/step` zwischen 1 und 10.000 liegen.
+Ungültige Werte werden mit HTTP 422 abgewiesen.
+
 ## Virtual-first und Hardware
 
 Die CPU ist py65-basiert; der Bus und die Registerperipherie sind virtuell. Ein physischer 6502 oder reale ACIA/VIA/GPIO benötigt später ein eigenständiges Bridge-Backend mit Pegelanpassung, Timing, Synchronisierung und Tests. Der Monitor und die Dateiverwaltung sollen dann unabhängig vom Backend bleiben.
