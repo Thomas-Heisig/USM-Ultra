@@ -188,6 +188,9 @@ class MemoryEdit(BaseModel):
     address: int = Field(ge=0, le=65535)
     value: int = Field(ge=0, le=255)
 
+class StepRequest(BaseModel):
+    count: int = Field(default=1, ge=1, le=100000)
+
 def get_monitor():
     global monitor_6502
     machine = active_6502()
@@ -264,9 +267,6 @@ class ProgramLoad(BaseModel):
     name: str
     address: int = Field(default=0x0200, ge=0, lt=32768)
     start: bool = True
-
-class StepRequest(BaseModel):
-    count: int = Field(default=1, ge=1, le=100000)
 
 class SerialInput(BaseModel):
     text: str = Field(max_length=4096)

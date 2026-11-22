@@ -116,7 +116,7 @@ class SBC6502:
             from py65.devices.mpu6502 import MPU
         except ImportError as exc:
             raise RuntimeError("Install optional CPU dependency: pip install -e '.[6502]'") from exc
-        self.cpu = MPU(memory=self.memory)
+        self.cpu = MPU(memory=self.memory, pc=None)
         self.cpu.reset()
         return self.cpu.pc
     def load_program(self, payload, address=0x0200, start=True):
